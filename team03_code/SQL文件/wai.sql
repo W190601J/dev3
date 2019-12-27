@@ -2,6 +2,9 @@
 /* DBMS name:      MySQL 5.0                                    */
 /* Created on:     2019/12/26 16:13:41                          */
 /*==============================================================*/
+
+CREATE DATABASE sells;
+USE sells;
 DROP TABLE IF EXISTS chef;
 DROP TABLE IF EXISTS class;
 DROP TABLE IF EXISTS details;
