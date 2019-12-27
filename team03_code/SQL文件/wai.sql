@@ -17,7 +17,7 @@ CREATE TABLE chef
    cid                  INT NOT NULL AUTO_INCREMENT COMMENT '厨师ID',
    cname                VARCHAR(128) BINARY NOT NULL COMMENT '厨师名',
    cinfo                VARCHAR(256) COMMENT '厨师简介',
-   cphoto               VARCHAR(128) NOT NULL COMMENT '厨师照片',
+   cphoto               VARCHAR(512) NOT NULL COMMENT '厨师照片',
    ccreate              TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '厨师新增时间',
    cupdate              TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '厨师修改时间',
    PRIMARY KEY (cid)
@@ -51,11 +51,11 @@ CREATE TABLE details
    oid                  VARCHAR(32) NOT NULL COMMENT '订单总表ID',
    dname                VARCHAR(32) NOT NULL COMMENT '当前菜品姓名',
    dprice               DECIMAL(8,2) NOT NULL COMMENT '菜品当前价格',
-   dphoto               VARCHAR(128) COMMENT '菜品图片',
+   dphoto               VARCHAR(512) COMMENT '菜品图片',
    quantity             INT NOT NULL COMMENT '订购菜品数量',
    beiyong1             VARCHAR(32) COMMENT '备用1',
-   PRIMARY KEY (did),
-   UNIQUE KEY AK_Key_2 (oid)
+   PRIMARY KEY (did)
+   
 );
 
 ALTER TABLE details COMMENT '订单详情表';
