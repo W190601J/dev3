@@ -9,7 +9,7 @@ import java.util.Date;
  * 厨师类
  */
 public class Chef {
-    private Integer cid;//厨师ID
+    private Integer chid;//厨师ID
     private String cname;//厨师姓名
     private String cinfo;//厨师简介
     private String cphoto;//厨师照片
@@ -22,8 +22,8 @@ public class Chef {
   public  Chef(){
 
   }
-    public Chef(Integer cid, String cname, String cinfo, String cphoto, Date ccreate, Date cupdate) {
-        this.cid = cid;
+    public Chef(Integer chid, String cname, String cinfo, String cphoto, Date ccreate, Date cupdate) {
+        this.chid = chid;
         this.cname = cname;
         this.cinfo = cinfo;
         this.cphoto = cphoto;
@@ -32,11 +32,11 @@ public class Chef {
     }
 
     public Integer getCid() {
-        return cid;
+        return chid;
     }
 
     public void setCid(Integer cid) {
-        this.cid = cid;
+        this.chid = cid;
     }
 
     public String getCname() {
