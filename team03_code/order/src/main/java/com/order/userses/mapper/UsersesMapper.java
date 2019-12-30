@@ -1,9 +1,7 @@
 package com.order.userses.mapper;
 
 import com.order.userses.pojo.User;
-
 import org.apache.ibatis.annotations.*;
-
 import java.util.List;
 
 public interface UsersesMapper {

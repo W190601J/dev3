@@ -22,5 +22,4 @@ public interface UsersesService {
      * 用户分页查询（带查询条件）
      */
     public List<User> findUser(Integer page, Integer pageSize,String keyword);
-
 }
