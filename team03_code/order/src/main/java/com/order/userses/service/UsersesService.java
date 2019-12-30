@@ -2,7 +2,6 @@ package com.order.userses.service;
 
 import com.order.userses.pojo.User;
 
-<<<<<<< HEAD
 import java.util.List;
 
 public interface UsersesService {
@@ -23,8 +22,5 @@ public interface UsersesService {
      * 用户分页查询（带查询条件）
      */
     public List<User> findUser(Integer page, Integer pageSize,String keyword);
-=======
-public interface UsersesService {
-    public User query(User user);
->>>>>>> 7a4dbc5e6ecf0630f5250f962eb1cd2e0987926c
+
 }

@@ -1,7 +1,7 @@
 package com.order.userses.mapper;
 
 import com.order.userses.pojo.User;
-<<<<<<< HEAD
+
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -30,11 +30,4 @@ public interface UsersesMapper {
      */
     public List<User> findUser(@Param("start") Integer start, @Param("size") Integer size, @Param("keyword") String keyword);
 
-=======
-import org.apache.ibatis.annotations.Select;
-
-public interface UsersesMapper {
-    @Select("select uname,upwd from sells.users where uname=#{user.uname} and upwd=#{user.upwd} and rank=0")
-    public User query(User user);
->>>>>>> 7a4dbc5e6ecf0630f5250f962eb1cd2e0987926c
 }

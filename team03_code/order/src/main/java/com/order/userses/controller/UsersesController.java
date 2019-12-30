@@ -13,11 +13,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsersesController {
     @Autowired
     private UsersesServiceImpl usersesService;
-    public ResponseEntity<Integer> query(User user){
-        User u1=usersesService.query(user);
-        if(u1!=null){
-            return new ResponseEntity<>(1, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(0,HttpStatus.UNAUTHORIZED);
-    }
+
 }
