@@ -11,13 +11,13 @@ public class Detail {
     private Float dprice;//菜品当前价格
     private String dphoto;//菜品图片
     private Integer quantity;//订购菜品数量
-    private String beiyong;//备用
+
 
     public Detail(){
 
     }
 
-    public Detail(Integer did, Integer fid, Integer oid, String dname, Float dprice, String dphoto, Integer quantity, String beiyong) {
+    public Detail(Integer did, Integer fid, Integer oid, String dname, Float dprice, String dphoto, Integer quantity) {
         this.did = did;
         this.fid = fid;
         this.oid = oid;
@@ -25,7 +25,6 @@ public class Detail {
         this.dprice = dprice;
         this.dphoto = dphoto;
         this.quantity = quantity;
-        this.beiyong = beiyong;
     }
 
     public Integer getDid() {
@@ -84,11 +83,4 @@ public class Detail {
         this.quantity = quantity;
     }
 
-    public String getBeiyong() {
-        return beiyong;
-    }
-
-    public void setBeiyong(String beiyong) {
-        this.beiyong = beiyong;
-    }
 }

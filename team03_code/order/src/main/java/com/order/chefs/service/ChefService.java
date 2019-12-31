@@ -12,10 +12,9 @@ public interface ChefService  {
     public int delChef(Integer chid);
     //修改厨师信息
     public int updateChef(Chef chef);
-    //查询全部厨师信息
-    public List<Chef> queryChef();
+
     //按照id查询厨师信息
-    public List<Chef> queryChefById(@Param("chid")Integer chid);
+    public Chef queryChefById(@Param("chid")Integer chid);
     //分页带条件查询
     public List<Chef> findChef(Integer page, Integer pageSize, String keyword);
 }

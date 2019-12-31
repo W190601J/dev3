@@ -17,17 +17,17 @@ public class Ordering implements Serializable {
     private  String address;//买家地址
     private  Float amount;//订单总额
     private Integer pay;//订单支付状态： 0支付 1支付
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;//订单创建时间
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updatetime;//订单修改时间
-    private String beiyong1;//备用
+
    public Ordering(){
 
    }
-    public Ordering(Integer oid, Integer uid, String bname, String bphone, String address, Float amount, Integer pay, Date createtime, Date updatetime, String beiyong1) {
+    public Ordering(Integer oid, Integer uid, String bname, String bphone, String address, Float amount, Integer pay, Date createtime, Date updatetime) {
         this.oid = oid;
         this.uid = uid;
         this.bname = bname;
@@ -37,7 +37,6 @@ public class Ordering implements Serializable {
         this.pay = pay;
         this.createtime = createtime;
         this.updatetime = updatetime;
-        this.beiyong1 = beiyong1;
     }
 
     public Integer getOid() {
@@ -110,13 +109,5 @@ public class Ordering implements Serializable {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
-    }
-
-    public String getBeiyong1() {
-        return beiyong1;
-    }
-
-    public void setBeiyong1(String beiyong1) {
-        this.beiyong1 = beiyong1;
     }
 }

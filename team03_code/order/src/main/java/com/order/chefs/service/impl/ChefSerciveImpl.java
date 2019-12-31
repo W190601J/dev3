@@ -28,20 +28,17 @@ public class ChefSerciveImpl implements ChefService {
     }
 
     @Override
-    public List<Chef> queryChef() {
-        return chefMapper.queryChef();
-    }
-
-    @Override
-    public List<Chef> queryChefById(Integer cid) {
+    public Chef queryChefById(Integer cid) {
         return chefMapper.queryChefById(cid);
     }
 
     @Override
     public List<Chef> findChef(Integer page, Integer pageSize, String keyword) {
         //计算查询范围
+
         int start = (page - 1) * pageSize;
         int size = pageSize;
+
         return chefMapper.findChef(start, size,keyword);
     }
 }

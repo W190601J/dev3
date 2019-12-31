@@ -22,5 +22,5 @@ public interface FoodsService {
      * keyword：查询条件
      * 菜品分页查询（带查询条件）
      */
-    public List<Food> findFood(Integer page, Integer pageSize, String keyword);
+//    public List<Food> findFood(Integer page, Integer pageSize, String keyword);
 }

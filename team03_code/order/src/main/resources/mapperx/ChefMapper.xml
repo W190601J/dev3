@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- http://mybatis.org/dtd/mybatis-3-mapper.dtd -->
+
+<!-- namespace:命名空间，该值与接口保持一致 -->
+<mapper namespace="com.order.chefs.mapper.ChefMapper">
+    <!-- 开启二级缓存，默认情况下没有有开启的 -->
+    <cache/>
+<!--    <resultMap id="chefMap" type="com.order.chefs.pojo.Chef">-->
+
+<!--    </resultMap>-->
+
+    <!--	public int updateChef(Chef chef);修改厨师信息-->
+    <update id="updateChef" parameterType="com.order.chefs.pojo.Chef">
+        update chef
+        <set>
+            <if test="cname!=null">
+                cname=#{cname},
+            </if>
+            <if test="cinfo!=null">
+                cinfo=#{cinfo},
+            </if>
+            <if test="cphoto!=null">
+                cphoto=#{cphoto},
+            </if>
+        </set>
+        where chid=#{chid}
+    </update>
+
+    <!-- public List<Chef> findChef(@Param("start") Integer start, @Param("size") Integer size, @Param("keyword") String keyword);-->
+    <select id="findChef" resultType="com.order.chefs.pojo.Chef">
+        select chid,cname,cinfo,cphoto,ccreate,cupdate from chef
+        <if test="keyword!=null">
+            where cname like '%${keyword}%' or cinfo like '%${keyword}%'
+        </if>
+        limit #{start},#{size}
+    </select>
+
+</mapper>

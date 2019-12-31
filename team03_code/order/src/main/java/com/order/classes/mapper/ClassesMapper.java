@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 public interface ClassesMapper {
-    //添加菜品类型
-    @Insert("INSERT INTO class(cnumber,cname) VALUES(cnumber=#{cnumber},cname=#{cname})")
+    //添加菜品类型，方法已测
+    @Insert("INSERT INTO class (cnumber,cname) VALUES (#{cnumber},#{cname})")
     public int addClasses(Cuisine cuisine);
-    //删除菜品类型
+    //删除菜品类型，方法已测
     @Delete("DELETE FROM class where cid=#{cid}")
     public  int delClasses(@Param("cid")Integer cid);
     //修改菜品类型

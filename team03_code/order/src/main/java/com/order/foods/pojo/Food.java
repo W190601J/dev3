@@ -19,17 +19,16 @@ public class Food implements Serializable {
     private  Integer fsell;//菜品销量 默认为：0
     private  Integer cstock;//菜品库存
     private  Integer fstatus;//菜品状态：0正常 1为下架
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fcreate;//菜品创建时间
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fupdate;//菜品修改时间
-    private String beiyong1;//备用
    public Food(){
 
    }
-    public Food(Integer fid, String fname, Integer cnumber, Float price, String fphoto, String finfo, Integer fsell, Integer cstock, Integer fstatus, Date fcreate, Date fupdate, String beiyong1) {
+    public Food(Integer fid, String fname, Integer cnumber, Float price, String fphoto, String finfo, Integer fsell, Integer cstock, Integer fstatus, Date fcreate, Date fupdate) {
         this.fid = fid;
         this.fname = fname;
         this.cnumber = cnumber;
@@ -41,7 +40,6 @@ public class Food implements Serializable {
         this.fstatus = fstatus;
         this.fcreate = fcreate;
         this.fupdate = fupdate;
-        this.beiyong1 = beiyong1;
     }
 
     public Integer getFid() {
@@ -130,13 +128,5 @@ public class Food implements Serializable {
 
     public void setFupdate(Date fupdate) {
         this.fupdate = fupdate;
-    }
-
-    public String getBeiyong1() {
-        return beiyong1;
-    }
-
-    public void setBeiyong1(String beiyong1) {
-        this.beiyong1 = beiyong1;
     }
 }

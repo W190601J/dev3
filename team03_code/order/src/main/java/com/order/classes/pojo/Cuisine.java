@@ -11,25 +11,25 @@ import java.util.Date;
 public class Cuisine {
     private Integer cid;//菜品类ID
     private Integer cnumber;//菜品类编号
-    private String  cname;//菜品类名
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String cname;//菜品类名
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")  //timezone属性正常情况下 不需要加
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date classcreate;//菜品类创建时间
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")  //timezone属性正常情况下 不需要加
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date classupdate;//菜品类更新时间
-    private String beiyong;//备用
 
-    public Cuisine(){
 
-  }
-    public Cuisine(Integer cid, Integer cnumber, String cname, Date classcreate, Date classupdate, String beiyong) {
+    public Cuisine() {
+
+    }
+
+    public Cuisine(Integer cid, Integer cnumber, String cname, Date classcreate, Date classupdate) {
         this.cid = cid;
         this.cnumber = cnumber;
         this.cname = cname;
         this.classcreate = classcreate;
         this.classupdate = classupdate;
-        this.beiyong = beiyong;
     }
 
     public Integer getCid() {
@@ -72,11 +72,5 @@ public class Cuisine {
         this.classupdate = classupdate;
     }
 
-    public String getBeiyong() {
-        return beiyong;
-    }
 
-    public void setBeiyong(String beiyong) {
-        this.beiyong = beiyong;
-    }
 }
