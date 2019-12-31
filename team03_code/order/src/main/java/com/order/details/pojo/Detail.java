@@ -1,12 +1,14 @@
 package com.order.details.pojo;
 
+import com.order.orderings.pojo.Ordering;
+
 /**
- * 订单类
+ * 订单详情类
  */
 public class Detail {
     private Integer did;//订单详情ID
     private Integer fid;//菜品ID
-    private Integer oid;//订单总表ID
+    private Ordering ordering;//引用订单表
     private String dname;//当前菜品名
     private Float dprice;//菜品当前价格
     private String dphoto;//菜品图片
@@ -20,7 +22,7 @@ public class Detail {
     public Detail(Integer did, Integer fid, Integer oid, String dname, Float dprice, String dphoto, Integer quantity) {
         this.did = did;
         this.fid = fid;
-        this.oid = oid;
+        this.ordering = ordering;
         this.dname = dname;
         this.dprice = dprice;
         this.dphoto = dphoto;
@@ -43,12 +45,12 @@ public class Detail {
         this.fid = fid;
     }
 
-    public Integer getOid() {
-        return oid;
+    public Ordering getOrdering() {
+        return ordering;
     }
 
-    public void setOid(Integer oid) {
-        this.oid = oid;
+    public void setOrdering(Ordering ordering) {
+        this.ordering = ordering;
     }
 
     public String getDname() {

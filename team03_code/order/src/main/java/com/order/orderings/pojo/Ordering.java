@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 订单总表类
+ * 订单类
  */
 public class Ordering implements Serializable {
     private  Integer oid;//订单ID
