@@ -38,11 +38,11 @@ public class FoodsServiceImpl implements FoodsService {
         return foodsMapper.queryFoodById(fid);
     }
 
-//    @Override
-//    public List<Food> findFood(Integer page, Integer pageSize, String keyword) {
-//        //计算查询范围
-//        int start = (page - 1) * pageSize;
-//        int size = pageSize;
-//        return foodsMapper.findFood(start, size,keyword);
-//    }
+    @Override
+    public List<Food> findFood(Integer page, Integer pageSize, String keyword) {
+        //计算查询范围
+        int start = (page - 1) * pageSize;
+        int size = pageSize;
+        return foodsMapper.findFood(start, size,keyword);
+    }
 }

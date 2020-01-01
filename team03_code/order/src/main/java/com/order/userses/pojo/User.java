@@ -14,11 +14,11 @@ public class User implements Serializable {
     private String uname;//用户名
     private String upwd;//用户密码
     private String uphone;//用户电话
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8") //timezone属性正常情况下 不需要加
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8") //timezone属性正常情况下 不需要加
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date ucreate;//用户创建时间
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date userupdate;//用户更新时间
     private Integer rank;//用户级别  0：管理员 1：普通用户 2:老板
 

@@ -18,7 +18,7 @@ public class Food implements Serializable {
     private  String finfo;//菜品简介
     private  Integer fsell;//菜品销量 默认为：0
     private  Integer cstock;//菜品库存
-    private  Integer fstatus;//菜品状态：0正常 1为下架
+    private  Integer fstatus;//菜品状态：0上架 1为下架
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")  //timezone属性正常情况下 不需要加
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fcreate;//菜品创建时间
@@ -128,5 +128,22 @@ public class Food implements Serializable {
 
     public void setFupdate(Date fupdate) {
         this.fupdate = fupdate;
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "fid=" + fid +
+                ", fname='" + fname + '\'' +
+                ", cnumber=" + cnumber +
+                ", price=" + price +
+                ", fphoto='" + fphoto + '\'' +
+                ", finfo='" + finfo + '\'' +
+                ", fsell=" + fsell +
+                ", cstock=" + cstock +
+                ", fstatus=" + fstatus +
+                ", fcreate=" + fcreate +
+                ", fupdate=" + fupdate +
+                '}';
     }
 }
