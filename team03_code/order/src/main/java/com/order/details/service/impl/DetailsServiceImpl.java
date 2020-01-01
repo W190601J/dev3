@@ -18,7 +18,7 @@ public class DetailsServiceImpl implements DetailsService {
     }
 
     @Override
-    public List<Detail> findAll(Integer oid) {
+    public List<Detail> findAll(String oid) {
         return dao.findAll(oid);
     }
 }

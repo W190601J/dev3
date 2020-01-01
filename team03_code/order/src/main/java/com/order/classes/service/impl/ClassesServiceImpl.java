@@ -3,7 +3,6 @@ package com.order.classes.service.impl;
 import com.order.classes.mapper.ClassesMapper;
 import com.order.classes.pojo.Cuisine;
 import com.order.classes.service.ClassesService;
-import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +12,7 @@ import java.util.List;
 public class ClassesServiceImpl implements ClassesService {
    @Autowired
    private ClassesMapper classesMapper;
+
     @Override
     public int addClasses(Cuisine cuisine) {
         return classesMapper.addClasses(cuisine);

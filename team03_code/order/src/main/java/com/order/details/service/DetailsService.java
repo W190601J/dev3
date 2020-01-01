@@ -8,5 +8,5 @@ public interface DetailsService {
 
     public int detailsAdd(Detail detail);
 
-    public List<Detail> findAll(Integer oid);
+    public List<Detail> findAll(String oid);
 }

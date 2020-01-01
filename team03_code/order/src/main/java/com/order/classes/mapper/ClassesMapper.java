@@ -12,13 +12,13 @@ public interface ClassesMapper {
     //删除菜品类型，方法已测
     @Delete("DELETE FROM class where cid=#{cid}")
     public  int delClasses(@Param("cid")Integer cid);
-    //修改菜品类型
+    //修改菜品类型，方法已测
     @Update("UPDATE class SET cnumber=#{cnumber},cname=#{cname} WHERE cid=#{cid}")
     public  int updateClasses(Cuisine cuisine);
-    //查询全部类型信息
+    //查询全部类型信息，方法已测(应该加上分页)
     @Select("SELECT cid,cnumber,cname,classcreate,classupdate FROM class")
     public List<Cuisine> queryCuisine();
-    //按照CID查询类型信息
+    //按照CID查询类型信息，方法已测
     @Select("SELECT cid,cnumber,cname,classcreate,classupdate FROM class WHERE cid=#{cid}")
     public Cuisine queryCuisineById(@Param("cid")Integer cid);
      /**

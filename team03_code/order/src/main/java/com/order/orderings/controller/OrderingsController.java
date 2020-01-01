@@ -29,7 +29,7 @@ public class OrderingsController {
     }
 
     @GetMapping("/order/{oid}")
-    public Ordering findone(@PathVariable("oid") Integer oid){
+    public Ordering findone(@PathVariable("oid") String oid){
         return service.findone(oid);
     }
 
