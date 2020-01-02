@@ -2,6 +2,8 @@ package com.order.foods.service;
 
 import com.order.chefs.pojo.Chef;
 import com.order.foods.pojo.Food;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -22,5 +24,14 @@ public interface FoodsService {
      * keyword：查询条件
      * 菜品分页查询（带查询条件）
      */
+    //加库存,方法已测
+    public int addStock(Integer fid,Integer number);
+
+    //减库存,方法已测
+    public int reduceStock(Integer fid,Integer number);
+
+    //上下架菜品,方法已测
+    public int sold(Integer fstatus,Integer fid);
+
     public List<Food> findFood(Integer page, Integer pageSize, String keyword);
 }

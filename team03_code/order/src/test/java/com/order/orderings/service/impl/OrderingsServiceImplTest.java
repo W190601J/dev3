@@ -23,27 +23,32 @@ class OrderingsServiceImplTest {
     @Test
     void create() {
         Ordering ordering = new Ordering();
-        ordering.setUid(21);
-        ordering.setBname("张大大");
-        ordering.setBphone("15876576966");
-        ordering.setAddress("南苑第七百八十六号胡同");
-        List<Detail> detailList = new ArrayList<>();
+        ordering.setUid(22);
+        ordering.setBname("王先生");
+        ordering.setBphone("15570758899");
+        ordering.setAddress("公园路17号");
+        List<Detail> detailList = new ArrayList<Detail>();
         Detail detail1 = new Detail();
-        detail1.setQuantity(3);
-        detail1.setFid(2);
-        Detail detail2 = new Detail();
-        detail1.setQuantity(3);
-        detail1.setFid(3);
+        detail1.setQuantity(4);
+        detail1.setFid(5);
         detailList.add(detail1);
-//        detailList.add(detail2);
         ordering.setDetailList(detailList);
-
+        System.out.println(ordering.toString());
         service.create(ordering);
+    }
 
-
-
-
-
+    @Test
+    void findone(){
+        Ordering ordering = service.findone("65022720200101100630");
+        System.out.println(ordering);
 
     }
+
+    @Test
+    void findAll(){
+        List<Ordering> orderingList = service.findAll(21);
+        System.out.println(orderingList);
+    }
+
+
 }

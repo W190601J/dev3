@@ -1,6 +1,7 @@
 package com.order.foods.mapper;
 
 import com.order.foods.pojo.Food;
+import com.order.foods.service.FoodsService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ class FoodsMapperTest {
 
     @Autowired
     private FoodsMapper dao;
+
+    @Autowired
+    private FoodsService foodService;
 
     @Test
     void addFood() {
@@ -57,13 +61,24 @@ class FoodsMapperTest {
 
     @Test
     void addStock() {
+        dao.addStock(2,3);
+        Food food = dao.queryFoodById(2);
+        System.out.println(food.toString());
     }
 
     @Test
     void reduceStock() {
+        int a = foodService.reduceStock(5,4);
+        if(a==1){
+            Food food = dao.queryFoodById(5);
+            System.out.println(food.toString());
+        }
     }
 
     @Test
     void sold() {
+        dao.sold(0,2);
+        Food food = dao.queryFoodById(2);
+        System.out.println(food.toString());
     }
 }

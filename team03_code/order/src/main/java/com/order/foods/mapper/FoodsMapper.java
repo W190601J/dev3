@@ -30,15 +30,15 @@ public interface FoodsMapper {
     @Select("select fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus from food where fstatus=0")
     public List<Food> queryFoodByStatus();
 
-    //加库存
+    //加库存,方法已测
     @Update("update food set cstock=cstock+#{number} where fid=#{fid}")
     public int addStock(@Param("fid") Integer fid,@Param("number") Integer number);
 
-    //减库存
-    @Update("update food set cstock=cstock-#{number} where fid=#{fid}")
+    //减库存,方法已测
+    @Update("update food set cstock=cstock-#{number} where fid=#{fid})")
     public int reduceStock(@Param("fid")Integer fid,@Param("number") Integer number);
 
-    //上下架菜品
+    //上下架菜品,方法已测
     public int sold(@Param("fstatus")Integer fstatus,@Param("fid")Integer fid);
 
     /**
@@ -47,5 +47,6 @@ public interface FoodsMapper {
      * keyword：查询条件
      * 菜品分页查询（带查询条件）
      */
+
     public List<Food> findFood(@Param("start") Integer start, @Param("size") Integer size, @Param("keyword") String keyword);
 }

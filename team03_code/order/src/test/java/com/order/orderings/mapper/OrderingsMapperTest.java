@@ -47,4 +47,12 @@ class OrderingsMapperTest {
         }
 
     }
+
+    @Test
+    void cancle(){
+        Ordering ordering = new Ordering();
+        ordering.setOid("201912312257000001");
+        Ordering ordering1 = dao.cancel(ordering);
+        System.out.println(ordering1.toString());
+    }
 }

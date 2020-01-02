@@ -85,4 +85,16 @@ public class Detail {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return "Detail{" +
+                "did=" + did +
+                ", fid=" + fid +
+                ", oid='" + oid + '\'' +
+                ", dname='" + dname + '\'' +
+                ", dprice=" + dprice +
+                ", dphoto='" + dphoto + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
