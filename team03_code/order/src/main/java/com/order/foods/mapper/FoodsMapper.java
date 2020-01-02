@@ -19,11 +19,11 @@ public interface FoodsMapper {
     public int updateFood(Food food);
 
     //查询全部菜品信息(需加上分页)，已测试
-    @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus FROM food")
+    @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus,fcreate,fupdate FROM food")
     public List<Food> queryFood();
 
     //按照菜品id查询菜品信息,已测试
-    @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus FROM food WHERE fid=#{fid}")
+    @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus,fcreate,fupdate FROM food WHERE fid=#{fid}")
     public Food queryFoodById(@Param("fid")Integer fid);
 
     //根据菜品的状态查询所有已上架菜品（买家端）,方法已测

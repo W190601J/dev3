@@ -46,6 +46,15 @@ public class FoodsController {
         }
         return new ResponseEntity<>(Integer.valueOf(i),HttpStatus.OK);
     }
+    //查询所有
+    @RequestMapping(value = "/queryFood",method = RequestMethod.GET)
+    public ResponseEntity<?> queryFood(){
+        List<Food> l1=fs.queryFood();
+        if(l1==null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(l1,HttpStatus.OK);
+    }
     //带条件分页查询
 //    @RequestMapping(value = {"/{page}/{pageSize}/{keyword}","/{page}/{pageSize}"},method = RequestMethod.GET)
 //    public ResponseEntity<List<Food>> find(@PathVariable("page") Integer page, @PathVariable("pageSize") Integer pageSize, @PathVariable(name="keyword",required = false)String keyword){

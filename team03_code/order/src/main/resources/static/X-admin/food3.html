@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/xadmin.css">
+    <script src="./js/jquery-3.3.1.min.js"></script>
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
 </head>
@@ -69,25 +70,21 @@
                     <table class="layui-table layui-form">
                         <thead>
                         <tr>
-                            <th>
-                                <input type="checkbox" name="" lay-skin="primary">
-                            </th>
-                            <th>订单编号</th>
-                            <th>收货人</th>
-                            <th>总金额</th>
-                            <th>应付金额</th>
-                            <th>订单状态</th>
-                            <th>支付状态</th>
-                            <th>发货状态</th>
-                            <th>支付方式</th>
-                            <th>配送方式</th>
-                            <th>下单时间</th>
+                            <th>菜品ID</th>
+                            <th>菜品名</th>
+                            <th>菜品编号</th>
+                            <th>菜品价格</th>
+                            <th>菜品图片</th>
+                            <th>菜品简介</th>
+                            <th>菜品销量</th>
+                            <th>菜品库存</th>
+                            <th>菜品状态</th>
+                            <th>菜品创建时间</th>
+                            <th>菜品修改时间</th>
                             <th>操作</th></tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>
-                                <input type="checkbox" name="" lay-skin="primary"></td>
                             <td>2017009171822298053</td>
                             <td>老王:18925139194</td>
                             <td>7829.10</td>
@@ -105,46 +102,7 @@
                                     <i class="layui-icon">&#xe640;</i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="" lay-skin="primary"></td>
-                            <td>2017009171822298053</td>
-                            <td>老王:18925139194</td>
-                            <td>7829.10</td>
-                            <td>7854.10</td>
-                            <td>待确认</td>
-                            <td>未支付</td>
-                            <td>未发货</td>
-                            <td>其他方式</td>
-                            <td>申通物流</td>
-                            <td>2017-08-17 18:22</td>
-                            <td class="td-manage">
-                                <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
-                                    <i class="layui-icon">&#xe63c;</i></a>
-                                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                    <i class="layui-icon">&#xe640;</i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="" lay-skin="primary"></td>
-                            <td>2017009171822298053</td>
-                            <td>老王:18925139194</td>
-                            <td>7829.10</td>
-                            <td>7854.10</td>
-                            <td>待确认</td>
-                            <td>未支付</td>
-                            <td>未发货</td>
-                            <td>其他方式</td>
-                            <td>申通物流</td>
-                            <td>2017-08-17 18:22</td>
-                            <td class="td-manage">
-                                <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
-                                    <i class="layui-icon">&#xe63c;</i></a>
-                                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                    <i class="layui-icon">&#xe640;</i></a>
-                            </td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -177,6 +135,7 @@
         laydate.render({
             elem: '#end' //指定元素
         });
+        //loadData(1,10);
     });
 
 /*用户-停用*/
@@ -209,7 +168,60 @@ function member_stop(obj, id) {
 
         });
 }
+function loadData(page, pageSize, keyword) {
 
+    let url = `http://localhost:8080/class/queryCuisine`;
+    if (keyword != null) {
+        url = `class/${page}/${pageSize}/${keyword}`;
+    }
+
+    $.ajax({
+        method: 'get',
+        url: 'http://localhost:8080/class/queryCuisine',
+        success: function (data) {
+            let tr = '';
+            $.each(data, (i, v) => {
+                //判断状态:已启用、已停用
+                //     let info = '';
+                // let infoCls = '';
+                // if (v.doexist == 0) {
+                //     info = '已停用';
+                //     infoCls = 'btn btn-warning';
+                // } else if (v.doexist == 1) {
+                //     info = '已启用';
+                //     infoCls = 'btn btn-success';
+                // }
+                tr += `
+                <tr>
+                    <td>${v.fid}</td>
+                    <td>${v.fname}</td>
+                    <td>${v.cnumber}</td>
+                    <td>${v.price}</td>
+                    <td>${v.fphoto}</td>
+                    <td>${v.finfo}</td>
+                    <td>${v.fsell}</td>
+                    <td>${v.cstock}</td>
+                    <td>${v.fstatus}</td>
+                    <td>${v.fcreate}</td>
+                    <td>${v.fupdate}</td>
+                    <td class="td-manage">
+                         <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                         <i class="layui-icon">&#xe640;</i></a>
+                    </td>
+
+                </tr>
+
+                `
+            })
+
+            $('tbody').html(tr);
+
+
+        },
+        dataType: 'json'
+
+    })
+}
 /*用户-删除*/
 function member_del(obj, id) {
     layer.confirm('确认要删除吗？',

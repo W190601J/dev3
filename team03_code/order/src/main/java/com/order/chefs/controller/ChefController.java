@@ -35,7 +35,9 @@ public class ChefController {
     //删除厨师
     @RequestMapping(value = "/{chid}",method = RequestMethod.DELETE)
     public ResponseEntity<?> delChef(@PathVariable("chid")Integer chid){
+        System.out.println("chid:"+chid);
         int i =ci.delChef(chid);
+        System.out.println("i:"+i);
         if (i!=1){
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }

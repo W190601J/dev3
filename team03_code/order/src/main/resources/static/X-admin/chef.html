@@ -47,7 +47,7 @@
                                 <option value="5">已作废</option></select>
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <input type="text" name="username" placeholder="请输入订单号" autocomplete="off" class="layui-input"></div>
+                            <input type="text" name="username" placeholder="请输入厨师姓名" autocomplete="off" class="layui-input"></div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <button class="layui-btn" lay-submit="" lay-filter="sreach">
                                 <i class="layui-icon">&#xe615;</i></button>
@@ -55,24 +55,18 @@
                     </form>
                 </div>
                 <div class="layui-card-header">
-
                     <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
                         <i class="layui-icon"></i>添加</button></div>
                 <div class="layui-card-body ">
                     <table class="layui-table layui-form">
                         <thead>
                         <tr>
-                            <th>菜品ID</th>
-                            <th>菜品名</th>
-                            <th>菜品编号</th>
-                            <th>菜品价格</th>
-                            <th>菜品图片</th>
-                            <th>菜品简介</th>
-                            <th>菜品销量</th>
-                            <th>菜品库存</th>
-                            <th>菜品状态</th>
-                            <th>菜品创建时间</th>
-                            <th>菜品修改时间</th>
+                            <th>厨师ID</th>
+                            <th>厨师姓名</th>
+                            <th>厨师简介</th>
+                            <th>厨师照片</th>
+                            <th>厨师新增时间</th>
+                            <th>厨师修改时间</th>
                             <th>操作</th></tr>
                         </thead>
                         <tbody>
@@ -108,10 +102,17 @@
         laydate.render({
             elem: '#end' //指定元素
         });
-        queryFood();
+        loadData(1,10);
     });
-function queryFood() {
-    let url = `http://localhost:8080/foods/queryFood`;
+
+
+function loadData(page, pageSize, keyword) {
+
+    let url = `http://localhost:8080/chefs/${page}/${pageSize}`;
+    if (keyword != null) {
+        url = `class/${page}/${pageSize}/${keyword}`;
+    }
+
     $.ajax({
         method: 'get',
         url: url,
@@ -120,19 +121,14 @@ function queryFood() {
             $.each(data, (i, v) => {
                 tr += `
                 <tr>
-                    <td>${v.fid}</td>
-                    <td>${v.fname}</td>
-                    <td>${v.cnumber}</td>
-                    <td>${v.price}</td>
-                    <td>${v.fphoto}</td>
-                    <td>${v.finfo}</td>
-                    <td>${v.fsell}</td>
-                    <td>${v.cstock}</td>
-                    <td>${v.fstatus}</td>
-                    <td>${v.fcreate}</td>
-                    <td>${v.fupdate}</td>
+                    <td>${v.chid}</td>
+                    <td>${v.cname}</td>
+                    <td>${v.cinfo}</td>
+                    <td>${v.cphoto}</td>
+                    <td>${v.ccreate}</td>
+                    <td>${v.cupdate}</td>
                     <td class="td-manage">
-                         <a title="删除" onclick="member_del(this,${v.fid})" href="javascript:;">
+                         <a title="删除" onclick="member_del(${v.chid},${v.chid})">
                          <i class="layui-icon">&#xe640;</i></a>
                     </td>
 
@@ -140,7 +136,10 @@ function queryFood() {
 
                 `
             })
+
             $('tbody').html(tr);
+
+
         },
         dataType: 'json'
 
@@ -151,13 +150,13 @@ function member_del(obj, id) {
     console.log(id);
     layer.confirm('确认要删除吗？',
         function de(index) {
-            del(id);
+        del(id);
 
         });
 }
 function del(id) {
     //发异步删除数据
-    let url = `http://localhost:8080/foods/${id}`;
+    let url = `http://localhost:8080/chefs/${id}`;
     console.log(url);
     $.ajax({
         method: 'delete',
@@ -168,7 +167,7 @@ function del(id) {
                     icon: 1,
                     time: 1000
                 });
-                queryFood();
+                loadData(1,10);
             }else{
                 layer.msg('删除失败！',{
                     icon:5,
@@ -179,7 +178,6 @@ function del(id) {
         dataType: 'text'
     })
 }
-
 </script>
 
 </html>
