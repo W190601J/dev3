@@ -16,14 +16,16 @@ public interface OrderingsMapper {
     //创建一个订单[有关事务处理],通过测试
     public Ordering create(Ordering ordering);
 
-    //取消一个订单[有关事务处理]
+    //取消一个订单[有关事务处理],通过测试
     @Update("update ordering set orderstatus=2 where oid=#{oid}")
-    public Ordering cancel(Ordering ordering);
+    public int cancel(Ordering ordering);
 
-    //支付订单
+    //支付订单,此方法已经测试
+    @Update("update ordering set pay=1 where oid=#{oid}")
     public int pay(Ordering ordering);
 
-    //完结订单
+    //完结订单,此方法已通过测试(卖家后端进行操作)
+    @Update("update ordering set orderstatus=1 where oid=#{oid}")
     public int finish(Ordering ordering);
 
     //根据订单id查询单个订单，包括订单详情；已测

@@ -19,6 +19,7 @@ public class Ordering implements Serializable {
     private String address;//买家地址
     private Float amount;//订单总额
     private Integer pay;//订单支付状态： 0支付 1支付
+    private Integer orderstatus;//订单状态：0为新订单，1为完结订单，2为取消订单
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")  //timezone属性正常情况下 不需要加
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createtime;//订单创建时间
@@ -31,7 +32,7 @@ public class Ordering implements Serializable {
 
     }
 
-    public Ordering(String oid, Integer uid, String bname, String bphone, String address, Float amount, Integer pay, Date createtime, Date updatetime, List<Detail> detailList) {
+    public Ordering(String oid, Integer uid, String bname, String bphone, String address, Float amount, Integer pay, Integer orderstatus, Date createtime, Date updatetime, List<Detail> detailList) {
         this.oid = oid;
         this.uid = uid;
         this.bname = bname;
@@ -39,6 +40,7 @@ public class Ordering implements Serializable {
         this.address = address;
         this.amount = amount;
         this.pay = pay;
+        this.orderstatus = orderstatus;
         this.createtime = createtime;
         this.updatetime = updatetime;
         this.detailList = detailList;
@@ -124,6 +126,14 @@ public class Ordering implements Serializable {
         return detailList;
     }
 
+    public Integer getOrderstatus() {
+        return orderstatus;
+    }
+
+    public void setOrderstatus(Integer orderstatus) {
+        this.orderstatus = orderstatus;
+    }
+
     @Override
     public String toString() {
         return "Ordering{" +
@@ -134,6 +144,7 @@ public class Ordering implements Serializable {
                 ", address='" + address + '\'' +
                 ", amount=" + amount +
                 ", pay=" + pay +
+                ", orderstatus=" + orderstatus +
                 ", createtime=" + createtime +
                 ", updatetime=" + updatetime +
                 ", detailList=" + detailList +

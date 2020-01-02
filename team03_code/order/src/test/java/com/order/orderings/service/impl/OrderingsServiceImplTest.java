@@ -50,5 +50,29 @@ class OrderingsServiceImplTest {
         System.out.println(orderingList);
     }
 
+    @Test
+    void cancel(){
+        Ordering ordering = new Ordering();
+        ordering.setOid("61320820200101094954");
+        service.cancel(ordering);
+
+    }
+
+    @Test
+    void finish(){
+        Ordering ordering = new Ordering();
+        ordering.setOid("14268720200101102257");
+        service.finish(ordering);
+
+    }
+
+    @Test
+    void pay(){
+        Ordering ordering = new Ordering();
+        ordering.setOid("201912312257000001");
+        service.pay(ordering);
+
+    }
+
 
 }

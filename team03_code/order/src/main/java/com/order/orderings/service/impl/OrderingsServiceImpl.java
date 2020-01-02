@@ -75,14 +75,68 @@ public class OrderingsServiceImpl implements OrderingsService {
 
     //取消订单
     @Override
-    public Ordering cancel(Ordering ordering) {
-        return dao.cancel(ordering);
+    @Transactional
+    public int cancel(Ordering ordering) {
+
+        //检验订单状态
+        Ordering ordering1 = dao.findone(ordering.getOid());
+        System.out.println(ordering1);
+        if(ordering1.getOrderstatus()==2 || ordering1.getOrderstatus()==1){
+            throw new RuntimeException();
+        }
+
+
+        //进行取消订单
+        int a = dao.cancel(ordering);
+        if(a!=1){
+            throw new RuntimeException();
+        }
+
+        //返回库存
+        List<Detail> detailList = detailDao.findAll(ordering.getOid());
+        System.out.println(detailList);
+        for (Detail detail:detailList) {
+            Food food = foodService.queryFoodById(detail.getFid());
+            fdao.addStock(food.getFid(),detail.getQuantity());
+        }
+
+        //如果已支付的话需进行退款处理
+        if(ordering1.getPay()==1){
+            //TODO
+        }
+        return a;
     }
+
 
     //支付订单
     @Override
+    @Transactional
     public int pay(Ordering ordering) {
-        return dao.pay(ordering);
+        Ordering ordering1 = dao.findone(ordering.getOid());
+        //判断订单状态
+        if(ordering1.getOrderstatus()==2 || ordering1.getOrderstatus()==1){
+            throw new RuntimeException();
+        }
+        //判断支付状态
+        if(ordering1.getPay()==1){
+            throw new RuntimeException();
+        }
+
+        int a = dao.pay(ordering1);
+        return a;
+    }
+
+    //完结订单
+    @Override
+    @Transactional
+    public int finish(Ordering ordering) {
+        Ordering ordering1 = dao.findone(ordering.getOid());
+        //判断订单状态
+        if(ordering1.getOrderstatus()==2 || ordering1.getOrderstatus()==1){
+            throw new RuntimeException();
+        }
+        int a = dao.finish(ordering1);
+        return a;
     }
 
     //根据订单编号查询订单的所有数据信息，包括订单详情信息
@@ -100,6 +154,7 @@ public class OrderingsServiceImpl implements OrderingsService {
         return ordering;
     }
 
+    //根据用户ID查询用户的所有订单信息，包括订单详情信息
     @Override
     public List<Ordering> findAll(Integer uid) {
         List<Ordering> orderingList = dao.findAll(uid);

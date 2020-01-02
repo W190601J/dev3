@@ -15,10 +15,13 @@ public interface OrderingsService {
     public Ordering create(Ordering ordering);
 
     //取消一个订单
-    public Ordering cancel(Ordering ordering);
+    public int cancel(Ordering ordering);
 
     //支付订单
     public int pay(Ordering ordering);
+
+    //完结订单
+    public int finish(Ordering ordering);
 
     //查询单个订单
     public Ordering findone(String oid);

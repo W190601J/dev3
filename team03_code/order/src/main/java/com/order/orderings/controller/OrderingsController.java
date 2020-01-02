@@ -19,7 +19,7 @@ public class OrderingsController {
     }
 
     @PostMapping("/cancel")
-    public Ordering cancel(@RequestBody Ordering ordering){
+    public int cancel(@RequestBody Ordering ordering){
         return service.cancel(ordering);
     }
 
