@@ -13,7 +13,7 @@ public interface DetailsMapper {
     public int detailsAdd(Detail detail);
 
     //根据oid查询这个订单的所有订购商品，已测
-    @Select("select did,fid,oid,dname,dprice,dphoto,quantity from details")
+    @Select("select did,fid,oid,dname,dprice,dphoto,quantity from details where oid=#{oid}")
     public List<Detail> findAll(String oid);
 
 

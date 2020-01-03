@@ -7,7 +7,7 @@
 <!-- namespace:命名空间，该值与接口保持一致 -->
 <mapper namespace="com.order.foods.mapper.FoodsMapper">
 	<!-- 开启二级缓存，默认情况下没有有开启的 -->
-	<cache />
+
 	<!-- public int sold(@Param("fid")Integer fid); -->
 	<update id="sold" parameterType="java.lang.Integer">
 		update food

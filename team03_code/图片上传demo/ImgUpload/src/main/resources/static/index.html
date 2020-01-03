@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <form id="form1" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="name">姓名</label>
+            <input type="text" class="form-control" name="mname" id="mname" placeholder="请输入用户名" required>
+        </div>
+
+        <div class="form-group">
+            <label for="name">年龄</label>
+            <input type="number" class="form-control" name="mage" id="mage" placeholder="请输入用户名" required>
+        </div>
+
+        <div class="form-group">
+            <label for="photo">照片</label>
+            <!--这里面name为photo，在servlet中getPart方法来识别.-->
+            <input type="file" class="form-control-file" name="mphoto" id="photo" placeholder="请上传照片">
+            <small id="fileHelpId" class="form-text text-muted">请上传20X20大小的照片</small>
+        </div>
+        <button type="button" name="" id="btn" class="btn btn-primary btn-lg btn-block" onclick="save()">保存</button>
+    </form>
+
+
+    </div>
+
+    <div>
+        <img src="http://localhost:8080/img/4" style="width: 300px;height:500px">
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.3.1.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
+    <script>
+
+        function save() {
+            alert("save");
+            let form = document.querySelector('#form1');
+            //使用FormData上传数据
+            //FormData详细见:https://developer.mozilla.org/zh-CN/docs/Web/API/FormData
+            let formData = new FormData(form);
+            $.ajax({
+                method: 'post',
+                url: '/upload',
+                data: formData,
+                success: function (data) {
+                    if (data == '1') {
+                        alert("保存成功");
+                    }
+                },
+                //默认值为："application/x-www-form-urlencoded
+                //设置false表示忽略这个参数
+                contentType: false,
+                //该参数默认为true,设置false表示以对象的方式发送，而非字符串
+                processData: false,
+                dataType: 'text'
+            })
+        }
+
+    </script>
+</body>
+
+</html>

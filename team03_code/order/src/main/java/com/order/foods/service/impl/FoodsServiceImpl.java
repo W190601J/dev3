@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("FoodsServiceImpl")
 public class FoodsServiceImpl implements FoodsService {
 
     @Autowired
@@ -36,6 +36,26 @@ public class FoodsServiceImpl implements FoodsService {
     @Override
     public Food queryFoodById(Integer fid) {
         return foodsMapper.queryFoodById(fid);
+    }
+
+    @Override
+    public int addStock(Integer fid, Integer number) {
+        return foodsMapper.addStock(fid, number);
+    }
+
+    @Override
+    public int reduceStock(Integer fid, Integer number) {
+        Food food = foodsMapper.queryFoodById(fid);
+        if(food.getCstock()-number<0){
+            throw new RuntimeException();
+        }
+        int a = foodsMapper.reduceStock(fid, number);
+        return a;
+    }
+
+    @Override
+    public int sold(Integer fstatus, Integer fid) {
+        return 0;
     }
 
     @Override

@@ -47,4 +47,15 @@ class OrderingsMapperTest {
         }
 
     }
+
+    @Test
+    void cancle(){
+        Ordering ordering = new Ordering();
+        ordering.setOid("14268720200101102257");
+        int a = dao.cancel(ordering);
+        if(a==1){
+            Ordering ordering1 = dao.findone("14268720200101102257");
+            System.out.println("订单状态："+ordering1.getOrderstatus());
+        }
+    }
 }

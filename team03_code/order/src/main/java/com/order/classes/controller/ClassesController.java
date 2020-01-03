@@ -49,7 +49,7 @@ public class ClassesController {
     }
 
     //分页查询菜品类
-    @RequestMapping(value = {"/{page}/{pageSize}/{keyword}","/chef/{page}/{pageSize}"},method = RequestMethod.GET)
+    @RequestMapping(value = {"{page}/{pageSize}/{keyword}","chef/{page}/{pageSize}"},method = RequestMethod.GET)
     public  ResponseEntity<List<Cuisine>> findClasses(@PathVariable("page") Integer page, @PathVariable("pageSize") Integer pageSize, @PathVariable(name="keyword",required = false)String keyword) {
         List<Cuisine> lc=cls.findClasses(page,pageSize,keyword);
         if (lc.isEmpty()) {
@@ -57,4 +57,13 @@ public class ClassesController {
         }
         return new ResponseEntity<>(lc, HttpStatus.OK);
     }
+    @RequestMapping(value = {"/queryCuisine"},method = RequestMethod.GET)
+    public  ResponseEntity<List<Cuisine>> queryCuis() {
+        List<Cuisine> lc=cls.queryCuisine();
+        if (lc.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(lc, HttpStatus.OK);
+    }
+
 }
