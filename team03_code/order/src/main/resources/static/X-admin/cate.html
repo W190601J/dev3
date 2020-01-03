@@ -39,7 +39,6 @@
                             <input class="layui-input" placeholder="开始日" name="start" id="start"></div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <input class="layui-input" placeholder="截止日" name="end" id="end"></div>
-
                         <div class="layui-input-inline layui-show-xs-block">
                             <select name="contrller">
                                 <option value="">订单状态</option>
@@ -103,42 +102,27 @@
 <script>layui.use(['laydate', 'form'],
     function () {
         var laydate = layui.laydate;
-
         //执行一个laydate实例
         laydate.render({
             elem: '#start' //指定元素
         });
-
         //执行一个laydate实例
         laydate.render({
             elem: '#end' //指定元素
         });
         loadData(1,10);
     });
-
 function loadData(page, pageSize, keyword) {
-
     let url = `queryCuisine`;
     if (keyword != null) {
         url = `class/${page}/${pageSize}/${keyword}`;
     }
-
     $.ajax({
         method: 'get',
         url: 'http://localhost:8080/class/queryCuisine',
         success: function (data) {
             let tr = '';
             $.each(data, (i, v) => {
-                //判断状态:已启用、已停用
-            //     let info = '';
-            // let infoCls = '';
-            // if (v.doexist == 0) {
-            //     info = '已停用';
-            //     infoCls = 'btn btn-warning';
-            // } else if (v.doexist == 1) {
-            //     info = '已启用';
-            //     infoCls = 'btn btn-success';
-            // }
             tr += `
                 <tr>
                     <td>${v.cid}</td>
@@ -151,7 +135,6 @@ function loadData(page, pageSize, keyword) {
                          <a title="删除" onclick="member_del(this,${v.cid})">
                          <i class="layui-icon">&#xe640;</i></a>
                     </td>
-
                 </tr>
 
                 `
@@ -171,7 +154,6 @@ function member_del(obj, id) {
     layer.confirm('确认要删除吗？',
         function de(index) {
             del(id);
-
         });
 }
 function del(id) {
@@ -198,7 +180,5 @@ function del(id) {
         dataType: 'text'
     })
 }
-
 </script>
-
 </html>
