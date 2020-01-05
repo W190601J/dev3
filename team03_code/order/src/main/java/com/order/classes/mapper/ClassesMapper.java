@@ -16,10 +16,10 @@ public interface ClassesMapper {
     @Update("UPDATE class SET cnumber=#{cnumber},cname=#{cname} WHERE cid=#{cid}")
     public  int updateClasses(Cuisine cuisine);
     //查询全部类型信息，方法已测(应该加上分页)
-    @Select("SELECT cid,cnumber,cname,classcreate,classupdate FROM class")
+    @Select("SELECT cid,cnumber,cname,classcreate,classupdate,beiyong1 FROM class")
     public List<Cuisine> queryCuisine();
     //按照CID查询类型信息，方法已测
-    @Select("SELECT cid,cnumber,cname,classcreate,classupdate FROM class WHERE cid=#{cid}")
+    @Select("SELECT cid,cnumber,cname,classcreate,classupdate,beiyong1 FROM class WHERE cid=#{cid}")
     public Cuisine queryCuisineById(@Param("cid")Integer cid);
      /**
      * start：起始位置

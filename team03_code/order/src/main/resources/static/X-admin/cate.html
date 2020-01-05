@@ -60,11 +60,8 @@
                     </form>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                        <i class="layui-icon"></i>批量删除
-                    </button>
-                    <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
-                        <i class="layui-icon"></i>添加
+                    <button class="layui-btn" onclick="xadmin.open('添加菜品','./classadd.html',450,400)">
+                        <i class="layui-icon"></i>添加菜品
                     </button>
                 </div>
                 <div class="layui-card-body ">
@@ -72,7 +69,7 @@
                         <thead>
                         <tr>
                             <th>菜品id</th>
-                            <th>菜品类编号</th>
+                            <th>图片</th>
                             <th>菜品类名</th>
                             <th>菜品类创建时间</th>
                             <th>菜品类更新时间</th>
@@ -126,7 +123,7 @@ function loadData(page, pageSize, keyword) {
             tr += `
                 <tr>
                     <td>${v.cid}</td>
-                    <td>${v.cnumber}</td>
+                    <td><img src="http://localhost:8080/class/img/${v.cid}"></td>
                     <td>${v.cname}</td>
                     <td>${v.classcreate}</td>
                     <td>${v.classupdate}</td>
