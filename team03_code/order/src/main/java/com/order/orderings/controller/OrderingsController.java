@@ -38,7 +38,4 @@ public class OrderingsController {
         return service.findAll(uid);
     }
 
-
-
-
 }
