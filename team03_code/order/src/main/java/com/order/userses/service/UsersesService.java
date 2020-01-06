@@ -5,6 +5,9 @@ import com.order.userses.pojo.User;
 import java.util.List;
 
 public interface UsersesService {
+
+    //验证用户信息
+    public User check(User user);
     //添加用户
     public int addUser(User user);
     //删除用户

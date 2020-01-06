@@ -5,10 +5,7 @@ import com.order.userses.service.impl.UsersesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,13 +15,18 @@ public class UsersesController {
     @Autowired
     private UsersesServiceImpl usersesService;
 
-//    public ResponseEntity<Integer> query(User user){
-////        User u1=usersesService.query(user);
-////        if(u1!=null){
-////            return new ResponseEntity<>(1, HttpStatus.OK);
-////        }
-////        return new ResponseEntity<>(0,HttpStatus.UNAUTHORIZED);
-////    }
+    //验证用户
+    @PostMapping("/check")
+    public ResponseEntity<?> check(@RequestBody User user){
+        User a = usersesService.check(user);
+        if(a==null){
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }else{
+            return new ResponseEntity<>(a, HttpStatus.OK);
+        }
+    }
+
+
 //添加用户
 @RequestMapping(value = "/user",method = RequestMethod.POST)
 public ResponseEntity<?> addChef(@PathVariable User user){

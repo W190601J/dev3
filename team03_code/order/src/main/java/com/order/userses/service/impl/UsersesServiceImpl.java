@@ -12,6 +12,12 @@ import org.springframework.stereotype.Service;
 public class UsersesServiceImpl implements UsersesService {
     @Autowired
     private UsersesMapper usersesMapper;
+
+    @Override
+    public User check(User user) {
+        return usersesMapper.check(user);
+    }
+
     @Override
     public int addUser(User user) {
         return usersesMapper.addUser(user);

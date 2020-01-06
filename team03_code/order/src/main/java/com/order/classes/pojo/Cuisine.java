@@ -72,5 +72,14 @@ public class Cuisine {
         this.classupdate = classupdate;
     }
 
-
+    @Override
+    public String toString() {
+        return "Cuisine{" +
+                "cid=" + cid +
+                ", cnumber=" + cnumber +
+                ", cname='" + cname + '\'' +
+                ", classcreate=" + classcreate +
+                ", classupdate=" + classupdate +
+                '}';
+    }
 }

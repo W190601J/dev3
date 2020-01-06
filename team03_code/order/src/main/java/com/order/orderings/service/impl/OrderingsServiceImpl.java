@@ -22,6 +22,9 @@ public class OrderingsServiceImpl implements OrderingsService {
     private OrderingsMapper dao;
 
     @Autowired
+    private OrderingsService orderingsService;
+
+    @Autowired
     private FoodsMapper fdao;
 
     @Autowired
@@ -45,6 +48,9 @@ public class OrderingsServiceImpl implements OrderingsService {
         //1、查询商品信息，包括其单价
         Float amountPrice = new Float(0);
         List<Detail> list = ordering.getDetailList();
+        if(list.size()==0){
+            throw new RuntimeException();
+        }
         for (Detail detail : list) {
             Food food = fdao.queryFoodById(detail.getFid());
             System.out.println(food.toString());
@@ -130,11 +136,18 @@ public class OrderingsServiceImpl implements OrderingsService {
     @Override
     @Transactional
     public int finish(Ordering ordering) {
-        Ordering ordering1 = dao.findone(ordering.getOid());
+        Ordering ordering1 = orderingsService.findone(ordering.getOid());
         //判断订单状态
         if(ordering1.getOrderstatus()==2 || ordering1.getOrderstatus()==1){
             throw new RuntimeException();
         }
+
+        //更新菜品销量
+        List<Detail> detailList = ordering1.getDetailList();
+        for (Detail detail:detailList) {
+            fdao.addsells(detail.getFid(),detail.getQuantity());
+        }
+
         int a = dao.finish(ordering1);
         return a;
     }
@@ -163,8 +176,15 @@ public class OrderingsServiceImpl implements OrderingsService {
         }
         for (Ordering ordering:orderingList) {
             List<Detail> list = detailDao.findAll(ordering.getOid());
-            ordering.setDetailList(list);
+            if(list.size()!=0){
+                ordering.setDetailList(list);
+            }
         }
         return orderingList;
+    }
+
+    @Override
+    public List<Ordering> queryAll() {
+        return dao.queryAll();
     }
 }

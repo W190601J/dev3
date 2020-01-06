@@ -36,5 +36,9 @@ public interface OrderingsMapper {
     @Select("select oid,uid,bname,bphone,address,amount,pay,orderstatus,createtime,updatetime from ordering where uid=#{uid}")
     public List<Ordering> findAll(Integer uid);
 
+    //查询所有订单
+    @Select("select oid,uid,bname,bphone,address,amount,pay,orderstatus,createtime,updatetime from ordering")
+    public List<Ordering> queryAll();
+
 
 }

@@ -5,6 +5,10 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 public interface UsersesMapper {
+    //验证用户信息
+//    @Select("select uid,uname,upwd,uphone,rank where upwd=#{upwd} and uphone=#{uphone} or uname=#{uname})")
+    public User check(User user);
+
     //添加用户
     @Insert("INSERT INTO users(uname,upwd,uphone,rank)VALUES(uname=#{uname},upwd=#{upwd},uphone#{uphone},rank#{rank})")
     public int addUser(User user);
