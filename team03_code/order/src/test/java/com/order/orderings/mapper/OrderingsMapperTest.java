@@ -19,6 +19,12 @@ class OrderingsMapperTest {
     private OrderingsMapper dao;
 
     @Test
+    void queryAll(){
+        List<Ordering> orderingList = dao.queryAll();
+        System.out.println(orderingList);
+    }
+
+    @Test
     void addOrdering() {
 
         Ordering ordering = new Ordering();

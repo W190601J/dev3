@@ -9,11 +9,7 @@ import com.order.utils.Note;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
@@ -26,6 +22,26 @@ public class UsersesController {
     @Autowired
     private Note note;
 
+//    //验证用户
+//    @PostMapping("/check")
+//    public ResponseEntity<?> check(@RequestBody User user){
+//        User a = usersesService.check(user);
+//        if(a==null){
+//            return new ResponseEntity(HttpStatus.NO_CONTENT);
+//        }else{
+//            return new ResponseEntity<>(a, HttpStatus.OK);
+//        }
+//    }
+
+//添加用户
+//@RequestMapping(value = "/user",method = RequestMethod.POST)
+//public ResponseEntity<?> addUser(@RequestBody User user){
+//    int i=usersesService.addUser(user);
+//    if (i!=1){
+//        return new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
+//    return new ResponseEntity<>(Integer.valueOf(i), HttpStatus.OK);
+//}
     //删除用户
     @RequestMapping(value = "/{uid}",method = RequestMethod.DELETE)
     public ResponseEntity<?> delChef(@PathVariable("uid")Integer uid){
@@ -36,8 +52,8 @@ public class UsersesController {
         return new ResponseEntity<>(Integer.valueOf(i),HttpStatus.OK);
     }
     //修改用户信息
-    @RequestMapping(value = "/user",method = RequestMethod.PUT)
-    public ResponseEntity<?> updateChef(@PathVariable User user){
+    @RequestMapping(value = "/user/",method = RequestMethod.PUT)
+    public ResponseEntity<?> updateChef(@RequestBody User user){
         int i=usersesService.updateUser(user);
         if (i!=1){
             return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -55,7 +71,7 @@ public class UsersesController {
     }
     //注册用户
     @RequestMapping(value = "/user",method = RequestMethod.POST)
-    public String addChef(@PathVariable User user){
+    public String addChef(@RequestBody User user){
         //先进行用户搜索 确定用户名唯一性
         int i =usersesService.queryUserByUname(user.getUname());
         String s="用户名已存在";

@@ -72,7 +72,6 @@ public class Cuisine {
     public void setClassupdate(Date classupdate) {
         this.classupdate = classupdate;
     }
-
     public String getBeiyong1() {
         return beiyong1;
     }
@@ -80,4 +79,16 @@ public class Cuisine {
     public void setBeiyong1(String beiyong1) {
         this.beiyong1 = beiyong1;
     }
+
+    @Override
+    public String toString() {
+        return "Cuisine{" +
+                "cid=" + cid +
+                ", cnumber=" + cnumber +
+                ", cname='" + cname + '\'' +
+                ", classcreate=" + classcreate +
+                ", classupdate=" + classupdate +
+                '}';
+   
+}
 }

@@ -69,6 +69,13 @@ class FoodsMapperTest {
     }
 
     @Test
+    void addsells() {
+        dao.addsells(2,10);
+        Food food = dao.queryFoodById(2);
+        System.out.println(food.toString());
+    }
+
+    @Test
     void sold() {
         dao.sold(0,2);
         Food food = dao.queryFoodById(2);

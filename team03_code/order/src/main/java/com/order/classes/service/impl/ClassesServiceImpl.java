@@ -39,6 +39,11 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     @Override
+    public Cuisine queryCuisineByNumber(Integer cnumber) {
+        return classesMapper.queryCuisineByNumber(cnumber);
+    }
+
+    @Override
     public List<Cuisine> findClasses(Integer page, Integer pageSize, String keyword) {
         //计算查询范围
         int start = (page - 1) * pageSize;

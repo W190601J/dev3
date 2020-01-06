@@ -40,6 +40,11 @@ public class FoodsServiceImpl implements FoodsService {
     }
 
     @Override
+    public List<Food> queryFoodByStatus() {
+        return foodsMapper.queryFoodByStatus();
+    }
+
+    @Override
     public int addStock(Integer fid, Integer number) {
         return foodsMapper.addStock(fid, number);
     }
@@ -52,6 +57,11 @@ public class FoodsServiceImpl implements FoodsService {
         }
         int a = foodsMapper.reduceStock(fid, number);
         return a;
+    }
+
+    @Override
+    public int addsells(Integer fid, Integer number) {
+        return foodsMapper.addsells(fid, number);
     }
 
     @Override
