@@ -24,30 +24,15 @@
         <form class="layui-form" id="form1" enctype="multipart/form-data">
             <div class="layui-form-item">
                 <label  class="layui-form-label">
-                    <span class="x-red">*</span>菜式id</label>
+                    <span class="x-red">*</span>厨师名字</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="cid" name="cid" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    <input type="text" id="cname" name="cname" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
                 <label  class="layui-form-label">
-                    <span class="x-red">*</span>菜品类编号</label>
+                    <span class="x-red">*</span>厨师简介</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="cnumber" name="cnumber" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
-            </div>
-            <div class="layui-form-item">
-                <label  class="layui-form-label">
-                    <span class="x-red">*</span>菜式名字</label>
-                <div class="layui-input-inline">
-                    <select id="shipping" name="cname" class="valid">
-                        <option value="湘菜">湘菜</option>
-                        <option value="川菜">川菜</option>
-                        <option value="闽菜">闽菜</option>
-                        <option value="粤菜">粤菜</option>
-                        <option value="鲁菜">鲁菜</option>
-                        <option value="苏菜">苏菜</option>
-                        <option value="浙菜">浙菜</option>
-                        <option value="徽菜">徽菜</option>
-                    </select>
+                    <textarea type="text" id="cinfo" name="cinfo" required="" lay-verify="required" autocomplete="off" class="layui-input"></textarea>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -56,9 +41,9 @@
                 <input type="file" class="form-control-file" name="mphoto" id="photo" placeholder="请上传照片">
             </div>
         </form>
-</tbody>
-</table>
-</div>
+        </tbody>
+        </table>
+    </div>
 </div>
 <div class="layui-form-item">
     <label class="layui-form-label"></label>
@@ -77,7 +62,7 @@ function add() {
     let formData = new FormData(form);
     $.ajax({
         method: 'post',
-        url: 'http://localhost:8080/class/addClass',
+        url: 'http://localhost:8080/chefs/chef',
         data: formData,
         success: function (data) {
             if (data == 1) {

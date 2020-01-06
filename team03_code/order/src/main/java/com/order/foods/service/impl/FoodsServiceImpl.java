@@ -3,6 +3,7 @@ package com.order.foods.service.impl;
 import com.order.foods.mapper.FoodsMapper;
 import com.order.foods.pojo.Food;
 import com.order.foods.service.FoodsService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +30,8 @@ public class FoodsServiceImpl implements FoodsService {
     }
 
     @Override
-    public List<Food> queryFood() {
-        return foodsMapper.queryFood();
+    public List<Food> queryFood(@Param("cnumber")Integer cnumber) {
+        return foodsMapper.queryFood(cnumber);
     }
 
     @Override

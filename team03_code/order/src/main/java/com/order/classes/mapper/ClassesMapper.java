@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface ClassesMapper {
     //添加菜品类型，方法已测
-    @Insert("INSERT INTO class (cnumber,cname) VALUES (#{cnumber},#{cname})")
+    @Insert("INSERT INTO class (cid,cnumber,cname,beiyong1) VALUES (#{cid},#{cnumber},#{cname},#{beiyong1})")
     public int addClasses(Cuisine cuisine);
     //删除菜品类型，方法已测
     @Delete("DELETE FROM class where cid=#{cid}")
     public  int delClasses(@Param("cid")Integer cid);
     //修改菜品类型，方法已测
-    @Update("UPDATE class SET cnumber=#{cnumber},cname=#{cname} WHERE cid=#{cid}")
+    @Update("UPDATE class SET cnumber=#{cnumber},cname=#{cname},beiyong1=#{beiyong1} WHERE cid=#{cid}")
     public  int updateClasses(Cuisine cuisine);
     //查询全部类型信息，方法已测(应该加上分页)
     @Select("SELECT cid,cnumber,cname,classcreate,classupdate,beiyong1 FROM class")

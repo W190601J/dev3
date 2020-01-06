@@ -15,7 +15,7 @@ public interface FoodsService {
     //修改菜品信息
     public int updateFood(Food food);
     //查询全部菜品信息
-    public List<Food> queryFood();
+    public List<Food> queryFood(Integer cnumber);
     //按照菜品id查询菜品信息
     public Food queryFoodById(Integer fid);
     /**
