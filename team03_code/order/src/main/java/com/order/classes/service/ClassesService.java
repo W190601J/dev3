@@ -18,6 +18,8 @@ public interface ClassesService {
     public List<Cuisine> queryCuisine();
     //按照CID查询类型信息
     public Cuisine queryCuisineById(Integer cid);
+    //根据Cnumber查询类型信息
+    public Cuisine queryCuisineByNumber(@Param("cnumber")Integer cnumber);
     /**
      * start：起始位置
      * size：查询条数

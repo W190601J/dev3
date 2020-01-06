@@ -39,7 +39,7 @@ class OrderingsServiceImplTest {
 
     @Test
     void findone(){
-        Ordering ordering = service.findone("65022720200101100630");
+        Ordering ordering = service.findone("14268720200101102257");
         System.out.println(ordering);
 
     }
@@ -61,7 +61,7 @@ class OrderingsServiceImplTest {
     @Test
     void finish(){
         Ordering ordering = new Ordering();
-        ordering.setOid("14268720200101102257");
+        ordering.setOid("84988520200106095021");
         service.finish(ordering);
 
     }

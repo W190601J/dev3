@@ -35,8 +35,12 @@ public interface FoodsMapper {
     public int addStock(@Param("fid") Integer fid,@Param("number") Integer number);
 
     //减库存,方法已测
-    @Update("update food set cstock=cstock-#{number} where fid=#{fid})")
+    @Update("update food set cstock=cstock-#{number} where fid=#{fid}")
     public int reduceStock(@Param("fid")Integer fid,@Param("number") Integer number);
+
+    //更新菜品销量信息
+    @Update("update food set fsell=fsell+#{number} where fid=#{fid}")
+    public int addsells(@Param("fid")Integer fid,@Param("number") Integer number);
 
     //上下架菜品,方法已测
     public int sold(@Param("fstatus")Integer fstatus,@Param("fid")Integer fid);
