@@ -36,14 +36,14 @@ public class UsersesController {
 
 
 //添加用户
-@RequestMapping(value = "/user",method = RequestMethod.POST)
-public ResponseEntity<?> addChef(@PathVariable User user){
-    int i=usersesService.addUser(user);
-    if (i!=1){
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
-    return new ResponseEntity<>(Integer.valueOf(i), HttpStatus.OK);
-}
+//@RequestMapping(value = "/user",method = RequestMethod.POST)
+//public ResponseEntity<?> addUser(@RequestBody User user){
+//    int i=usersesService.addUser(user);
+//    if (i!=1){
+//        return new ResponseEntity(HttpStatus.NO_CONTENT);
+//    }
+//    return new ResponseEntity<>(Integer.valueOf(i), HttpStatus.OK);
+//}
     //删除用户
     @RequestMapping(value = "/{uid}",method = RequestMethod.DELETE)
     public ResponseEntity<?> delChef(@PathVariable("uid")Integer uid){
@@ -54,8 +54,8 @@ public ResponseEntity<?> addChef(@PathVariable User user){
         return new ResponseEntity<>(Integer.valueOf(i),HttpStatus.OK);
     }
     //修改用户信息
-    @RequestMapping(value = "/user",method = RequestMethod.PUT)
-    public ResponseEntity<?> updateChef(@PathVariable User user){
+    @RequestMapping(value = "/user/",method = RequestMethod.PUT)
+    public ResponseEntity<?> updateChef(@RequestBody User user){
         int i=usersesService.updateUser(user);
         if (i!=1){
             return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -73,7 +73,7 @@ public ResponseEntity<?> addChef(@PathVariable User user){
     }
     //注册用户
     @RequestMapping(value = "/user",method = RequestMethod.POST)
-    public String addChef(@PathVariable User user){
+    public String addChef(@RequestBody User user){
         //先进行用户搜索 确定用户名唯一性
         int i =usersesService.queryUserByUname(user.getUname());
         String s="用户名已存在";
