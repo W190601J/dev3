@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -23,17 +22,16 @@ public class UsersesController {
     @Autowired
     private Note note;
 
-    //验证用户
-    @PostMapping("/check")
-    public ResponseEntity<?> check(@RequestBody User user){
-        User a = usersesService.check(user);
-        if(a==null){
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
-        }else{
-            return new ResponseEntity<>(a, HttpStatus.OK);
-        }
-    }
-
+//    //验证用户
+//    @PostMapping("/check")
+//    public ResponseEntity<?> check(@RequestBody User user){
+//        User a = usersesService.check(user);
+//        if(a==null){
+//            return new ResponseEntity(HttpStatus.NO_CONTENT);
+//        }else{
+//            return new ResponseEntity<>(a, HttpStatus.OK);
+//        }
+//    }
 
 //添加用户
 //@RequestMapping(value = "/user",method = RequestMethod.POST)

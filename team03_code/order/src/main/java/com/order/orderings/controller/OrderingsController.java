@@ -19,7 +19,6 @@ public class OrderingsController {
     //创建订单ok
     @PostMapping("/order/create")
     public Ordering create(@RequestBody Ordering ordering){
-        log.info("ordering:{}",ordering);
         return service.create(ordering);
     }
 
