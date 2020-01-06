@@ -6,14 +6,13 @@ import com.order.userses.pojo.User;
 import com.order.userses.service.impl.UsersesServiceImpl;
 import com.order.utils.JwtTokenUtil;
 import com.order.utils.Note;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -25,7 +24,6 @@ public class UsersesController {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private Note note;
-
     //删除用户
     @RequestMapping(value = "/{uid}",method = RequestMethod.DELETE)
     public ResponseEntity<?> delChef(@PathVariable("uid")Integer uid){
