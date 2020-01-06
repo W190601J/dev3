@@ -3,6 +3,7 @@ package com.order.foods.service;
 import com.order.chefs.pojo.Chef;
 import com.order.foods.pojo.Food;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public interface FoodsService {
     public List<Food> queryFood();
     //按照菜品id查询菜品信息
     public Food queryFoodById(Integer fid);
+
+    //根据菜品的状态查询所有已上架菜品（买家端）,方法已测
+    public List<Food> queryFoodByStatus();
     /**
      * start：起始位置
      * size：查询条数
@@ -29,6 +33,9 @@ public interface FoodsService {
 
     //减库存,方法已测
     public int reduceStock(Integer fid,Integer number);
+
+    //更新菜品销量信息
+    public int addsells(Integer fid,Integer number);
 
     //上下架菜品,方法已测
     public int sold(Integer fstatus,Integer fid);

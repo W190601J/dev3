@@ -21,6 +21,10 @@ public interface ClassesMapper {
     //按照CID查询类型信息，方法已测
     @Select("SELECT cid,cnumber,cname,classcreate,classupdate,beiyong1 FROM class WHERE cid=#{cid}")
     public Cuisine queryCuisineById(@Param("cid")Integer cid);
+    //按照Cnumber查询类型信息，方法已测
+    @Select("SELECT cid,cnumber,cname,classcreate,classupdate FROM class WHERE cnumber=#{cnumber}")
+    public Cuisine queryCuisineByNumber(@Param("cnumber")Integer cnumber);
+
      /**
      * start：起始位置
      * size：查询条数
