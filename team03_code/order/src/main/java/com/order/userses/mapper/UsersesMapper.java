@@ -32,4 +32,11 @@ public interface UsersesMapper {
      */
     public List<User> findUser(@Param("start") Integer start, @Param("size") Integer size, @Param("keyword") String keyword);
 
+
+    //查询用户名是否存在
+    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname}")
+    public int queryUserByUname(@Param("uname")String uname);
+    //验证登录
+    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname} AND upwd=#{upwd}")
+    public int longin(@Param("uname")String uname,@Param("upwd")String upwd);
 }

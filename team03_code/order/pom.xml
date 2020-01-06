@@ -12,6 +12,7 @@
     <artifactId>order</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>order</name>
+
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -37,8 +38,6 @@
             <artifactId>aliyun-java-sdk-core</artifactId>
             <version>4.0.6</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -49,7 +48,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
-
         </dependency>
         <!-- 阿里云短信服务所需 -->
         <dependency>
@@ -69,6 +67,7 @@
             <version>0.9.0</version>
         </dependency>
         <!-- 支付所需 -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

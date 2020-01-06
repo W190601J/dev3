@@ -5,8 +5,10 @@ import com.order.classes.service.impl.ClassesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.*;
 import java.util.List;
 
 /**
@@ -17,6 +19,7 @@ import java.util.List;
 public class ClassesController {
     @Autowired
     private ClassesServiceImpl cls;
+
 
     //添加菜品
     @RequestMapping(value = "/cuisine",method = RequestMethod.POST)
@@ -64,6 +67,16 @@ public class ClassesController {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(lc, HttpStatus.OK);
+    }
+    @GetMapping("/img/{mid}")
+    public void img(@PathVariable("mid") Integer mid, OutputStream out) throws IOException {
+        Cuisine c1=cls.queryCuisineById(mid);
+        String img=c1.getBeiyong1();
+        String url = "g:/x/img/"+img;
+        File file=new File(url);
+        InputStream input=new FileInputStream(file);
+        //用于显示一张图片
+        FileCopyUtils.copy(input,out);
     }
 
 }
