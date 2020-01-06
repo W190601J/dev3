@@ -56,7 +56,7 @@
                 </div>
                 <div class="layui-card-header">
 
-                    <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
+                    <button class="layui-btn" onclick="xadmin.open('添加用户','./foodadd.html',800,600)">
                         <i class="layui-icon"></i>添加</button></div>
                 <div class="layui-card-body ">
                     <table class="layui-table layui-form">
@@ -111,7 +111,7 @@
         queryFood();
     });
 function queryFood() {
-    let url = `http://localhost:8080/foods/queryFood`;
+    let url = `http://localhost:8080/foods/queryFood/1`;
     $.ajax({
         method: 'get',
         url: url,
@@ -124,14 +124,16 @@ function queryFood() {
                     <td>${v.fname}</td>
                     <td>${v.cnumber}</td>
                     <td>${v.price}</td>
-                    <td>${v.fphoto}</td>
+                    <td><img src="http://localhost:8080/foods/img/${v.fid}"></td>
                     <td>${v.finfo}</td>
                     <td>${v.fsell}</td>
                     <td>${v.cstock}</td>
-                    <td>${v.fstatus}</td>
+                    <td>${v.fstatus==0?'上架':'下架'}</td>
                     <td>${v.fcreate}</td>
                     <td>${v.fupdate}</td>
                     <td class="td-manage">
+                         <a title="编辑" onclick="xadmin.open('编辑','./foodedit.html?cid='+${v.fid},800,600)">
+                         <i class="layui-icon">&#xe642;</i></a>
                          <a title="删除" onclick="member_del(this,${v.fid})" href="javascript:;">
                          <i class="layui-icon">&#xe640;</i></a>
                     </td>

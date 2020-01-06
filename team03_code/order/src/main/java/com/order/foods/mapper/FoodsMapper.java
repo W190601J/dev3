@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface FoodsMapper {
     //添加菜品信息,方法已测
-    @Insert("INSERT INTO food (fname,cnumber,price,fphoto,finfo,cstock) VALUES (#{fname},#{cnumber},#{price},#{fphoto},#{finfo},#{cstock})")
+    @Insert("INSERT INTO food (fid,fname,cnumber,price,fphoto,finfo,cstock) VALUES (#{fid},#{fname},#{cnumber},#{price},#{fphoto},#{finfo},#{cstock})")
     public int addFood(Food food);
 
     //删除菜品信息,方法已测
@@ -19,8 +19,8 @@ public interface FoodsMapper {
     public int updateFood(Food food);
 
     //查询全部菜品信息(需加上分页)，已测试
-    @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus,fcreate,fupdate FROM food")
-    public List<Food> queryFood();
+    @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus,fcreate,fupdate FROM food where cnumber=#{cnumber}")
+    public List<Food> queryFood(@Param("cnumber")Integer cnumber);
 
     //按照菜品id查询菜品信息,已测试
     @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus,fcreate,fupdate FROM food WHERE fid=#{fid}")
@@ -35,8 +35,12 @@ public interface FoodsMapper {
     public int addStock(@Param("fid") Integer fid,@Param("number") Integer number);
 
     //减库存,方法已测
-    @Update("update food set cstock=cstock-#{number} where fid=#{fid})")
+    @Update("update food set cstock=cstock-#{number} where fid=#{fid}")
     public int reduceStock(@Param("fid")Integer fid,@Param("number") Integer number);
+
+    //更新菜品销量信息
+    @Update("update food set fsell=fsell+#{number} where fid=#{fid}")
+    public int addsells(@Param("fid")Integer fid,@Param("number") Integer number);
 
     //上下架菜品,方法已测
     public int sold(@Param("fstatus")Integer fstatus,@Param("fid")Integer fid);

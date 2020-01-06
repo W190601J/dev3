@@ -5,6 +5,10 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 public interface UsersesMapper {
+    //验证用户信息
+//    @Select("select uid,uname,upwd,uphone,rank where upwd=#{upwd} and uphone=#{uphone} or uname=#{uname})")
+    public User check(User user);
+
     //添加用户
     @Insert("INSERT INTO users(uname,upwd,uphone,rank)VALUES(uname=#{uname},upwd=#{upwd},uphone#{uphone},rank#{rank})")
     public int addUser(User user);
@@ -28,4 +32,11 @@ public interface UsersesMapper {
      */
     public List<User> findUser(@Param("start") Integer start, @Param("size") Integer size, @Param("keyword") String keyword);
 
+
+    //查询用户名是否存在
+    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname}")
+    public int queryUserByUname(@Param("uname")String uname);
+    //验证登录
+    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname} AND upwd=#{upwd}")
+    public int longin(@Param("uname")String uname,@Param("upwd")String upwd);
 }

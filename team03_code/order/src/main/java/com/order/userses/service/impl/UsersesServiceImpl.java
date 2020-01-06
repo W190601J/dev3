@@ -5,13 +5,18 @@ import com.order.userses.pojo.User;
 import com.order.userses.service.UsersesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 @Service
 public class UsersesServiceImpl implements UsersesService {
     @Autowired
     private UsersesMapper usersesMapper;
+
+    @Override
+    public User check(User user) {
+        return usersesMapper.check(user);
+    }
+
     @Override
     public int addUser(User user) {
         return usersesMapper.addUser(user);
@@ -43,5 +48,15 @@ public class UsersesServiceImpl implements UsersesService {
         int start = (page - 1) * pageSize;
         int size = pageSize;
         return usersesMapper.findUser(start, size, keyword);
+    }
+
+    @Override
+    public int queryUserByUname(String uname) {
+        return usersesMapper.queryUserByUname(uname);
+    }
+
+    @Override
+    public int login(String uname, String upwd) {
+        return usersesMapper.longin(uname,upwd);
     }
 }

@@ -2,6 +2,7 @@ package com.order.orderings.service;
 
 import com.order.orderings.mapper.OrderingsMapper;
 import com.order.orderings.pojo.Ordering;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public interface OrderingsService {
 
     //查询此用户所有已完成订单列表
     public List<Ordering> findAll(Integer uid);
+
+    //查询所有订单
+    public List<Ordering> queryAll();
 }

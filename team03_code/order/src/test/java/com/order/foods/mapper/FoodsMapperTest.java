@@ -34,14 +34,7 @@ class FoodsMapperTest {
     void updateFood() {
     }
 
-    @Test
-    void queryFood() {
-        List<Food> list = dao.queryFood();
-        for (Food food:
-                list) {
-            System.out.println("食物名称："+food.getFname());
-        }
-    }
+
 
     @Test
     void queryFoodById() {
@@ -73,6 +66,13 @@ class FoodsMapperTest {
             Food food = dao.queryFoodById(5);
             System.out.println(food.toString());
         }
+    }
+
+    @Test
+    void addsells() {
+        dao.addsells(2,10);
+        Food food = dao.queryFoodById(2);
+        System.out.println(food.toString());
     }
 
     @Test

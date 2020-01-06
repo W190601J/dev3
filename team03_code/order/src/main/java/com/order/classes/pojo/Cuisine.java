@@ -18,6 +18,7 @@ public class Cuisine {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")  //timezone属性正常情况下 不需要加
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date classupdate;//菜品类更新时间
+    private String beiyong1;
 
 
     public Cuisine() {
@@ -71,6 +72,23 @@ public class Cuisine {
     public void setClassupdate(Date classupdate) {
         this.classupdate = classupdate;
     }
+    public String getBeiyong1() {
+        return beiyong1;
+    }
 
+    public void setBeiyong1(String beiyong1) {
+        this.beiyong1 = beiyong1;
+    }
 
+    @Override
+    public String toString() {
+        return "Cuisine{" +
+                "cid=" + cid +
+                ", cnumber=" + cnumber +
+                ", cname='" + cname + '\'' +
+                ", classcreate=" + classcreate +
+                ", classupdate=" + classupdate +
+                '}';
+   
+}
 }
