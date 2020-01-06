@@ -59,4 +59,17 @@ public class OrderingsController {
         return service.queryAll();
     }
 
+    //查询所有订单ok
+    @RequestMapping(value = {"/order/{page}/{pageSize}/{keyword}","/order/{page}/{pageSize}/","/order/{page}/{pageSize}"}, method = RequestMethod.GET)
+    public List<Ordering> queryAllBy(@PathVariable("page") Integer page,@PathVariable("pageSize") Integer pageSize,@PathVariable(name="keyword",required = false)String keyword){
+        return service.queryAllBy(page,pageSize,keyword);
+    }
+    /**
+     * 得到总记录数
+     * @return
+     */
+    @GetMapping({"/order/count/{keyword}","/order/count/","/order/count"})
+    public int count(@PathVariable(required = false,value = "keyword") String keyword){
+        return service.count(keyword);
+    }
 }
