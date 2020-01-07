@@ -20,8 +20,16 @@ public class DetailsController {
 
     @GetMapping("/detail/{oid}")
     public List<Detail> findAll(@PathVariable("oid") String oid){
-        System.out.println(oid);
         return service.findAll(oid);
     }
 
+    @GetMapping("/sum/{fid}")
+    public int Sum(@PathVariable("fid") Integer fid){
+        return service.Sum(fid);
+    }
+
+    @GetMapping("/sumtotal/{month}")
+    public int SumTotal(Integer month){
+        return service.SumTotal(month);
+    }
 }

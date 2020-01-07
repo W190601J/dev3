@@ -46,4 +46,5 @@ public interface OrderingsMapper {
 
     //带条件总记录数
     public int count(@Param("keyword") String keyword);
+
 }
