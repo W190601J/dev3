@@ -81,8 +81,7 @@
                 let layer = layui.layer;//消息框
 
                 let counts = count(null);//总记录数
-                 alert(counts);
-                laypage.render({
+                  laypage.render({
                     elem: 'page',//注意：这里的page为id，但不能有#
                     count: counts,
                     curr: 1,
@@ -147,7 +146,6 @@
             if (keyword != null) {
                 url = `/ordering/order/${page}/${pageSize}/${keyword}`;
             }
-            alert(url);
             $.ajax({
                 method: 'get',
                 url: url,
@@ -207,27 +205,34 @@
                     area: ['1100px', '600px']
                 });
             }
+
+            /**
+             * 取消订单
+             * @param oid
+             * @param uid
+             */
             function quxiao(oid,uid) {
-                layer.confirm('确认要取消'+oid+'订单吗？');
+               // layer.confirm('确认要取消'+oid+'订单吗？');
                 let Ordering1 = {
                     oid: oid,
                     uid: uid,
                 }
                 //obj.dept=dept;
                 //将JSON对象转换成JSON字符串
-                let Ordering = JSON.stringify(Ordering1);
+                let s = JSON.stringify(Ordering1);
                 $.ajax({
                     method:'put',
-                    url:'/ordering/cancel',
-                    data:Ordering,
+                    url:'../../ordering/cancel',
+                    data:s,
                     success:function (data) {
+                        alert(data);
                         if(data==1){
                             loadData(1, 5, keyword);
                         }else {
                             layer.confirm('取消'+oid+'订单失败');
                         }
-
                     },
+                    contentType:'application/json;charset=utf-8',
                     dataType:'text',
                 })
             }
