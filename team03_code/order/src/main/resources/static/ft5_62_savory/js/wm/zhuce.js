@@ -12,7 +12,7 @@ function yzm(){
    }else{
       $.ajax({
           method:'post',
-          url:'/users/user/{phone}',
+          url:'/users/user/${phone}',
           success:function (data) {
              if (data!=null){
                 console.log("验证码为"+data);
@@ -32,6 +32,7 @@ function zhuce() {
    var phone=$('#phone').val();
    var yzm=$('#yzm').val();
    var yzm2=$('#yzm2').val();
+
    if (upwd!=upwd2){
       console.log("两次输入密码请相同")
    }else {
@@ -48,7 +49,7 @@ function zhuce() {
          let user = JSON.stringify(users);
          $.ajax({
             method: 'post',
-            url:'/users/{user}',
+            url:'/users/${user}',
             success:function (data) {
                console.log(data);
             },

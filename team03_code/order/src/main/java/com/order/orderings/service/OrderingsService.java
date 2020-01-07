@@ -32,4 +32,10 @@ public interface OrderingsService {
 
     //查询所有订单
     public List<Ordering> queryAll();
+
+    //条件查询订单
+    public List<Ordering> queryAllBy(Integer page, Integer pageSize, String keyword);
+
+    //条件查询总记录数
+    public int count(String keyword);
 }

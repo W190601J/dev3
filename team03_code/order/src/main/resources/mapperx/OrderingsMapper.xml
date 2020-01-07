@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- http://mybatis.org/dtd/mybatis-3-mapper.dtd -->
+
+<!-- namespace:命名空间，该值与接口保持一致 -->
+<mapper namespace="com.order.orderings.mapper.OrderingsMapper">
+    <!-- 开启二级缓存，默认情况下没有有开启的 -->
+
+<!--    <resultMap id="chefMap" type="com.order.chefs.pojo.Chef">-->
+
+<!--    </resultMap>-->
+
+    <select id="queryAllBy"  resultType="com.order.orderings.pojo.Ordering">
+        select oid,uid,bname,bphone,address,amount,pay,orderstatus,createtime,updatetime from ordering
+        <if test="keyword!=null">
+            where bname like '%${keyword}%' or bphone like '%${keyword}%' or address like '%${keyword}%'
+        </if>
+        limit #{start},#{size}
+    </select>
+
+    <select id="count" resultType="Integer">
+        SELECT COUNT(1) FROM ordering
+        <if test="keyword!=null">
+            where bname like '%${keyword}%' or bphone like '%${keyword}%' or address like '%${keyword}%'
+        </if>
+    </select>
+</mapper>

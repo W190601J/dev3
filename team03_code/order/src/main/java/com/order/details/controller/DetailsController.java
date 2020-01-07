@@ -20,6 +20,7 @@ public class DetailsController {
 
     @GetMapping("/detail/{oid}")
     public List<Detail> findAll(@PathVariable("oid") String oid){
+        System.out.println(oid);
         return service.findAll(oid);
     }
 
