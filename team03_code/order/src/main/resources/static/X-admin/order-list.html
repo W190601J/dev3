@@ -71,7 +71,7 @@
                 </div>
             </div>
         </div>
-    </body>
+        </div>
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script>
@@ -178,7 +178,7 @@
                     <td>${v.orderstatus== 0 ? '新订单' : v.gender == 1 ? '完结订单': '取消订单'}</td>
                     <td>${v.createtime}</td>
                     <td class="td-manage">
-                                            <a title="查看" id="chakan" onclick="xadmin.open('查看订单详情','./order-query.html?oid=' + ${v.oid}',1100,600)" href="javascript:;">
+                                            <a title="查看" id="chakan" onclick="edit(${v.oid})" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>
                                             <a title="取消" id="del" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                                 <i class="layui-icon">&#xe640;</i></a>
@@ -202,6 +202,13 @@
             let keyword = $('#suosou').val();
             loadData(1, 5, keyword);
         }
+        function edit(oid) {
+                layer.open({
+                    type: 2,
+                    content: 'order-query.html?oid=' + oid,
+                    area: ['1100px', '600px']
+                });
+            }
 </script>
-
+    </body>
 </html>
