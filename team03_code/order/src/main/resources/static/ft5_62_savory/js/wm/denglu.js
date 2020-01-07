@@ -6,7 +6,7 @@ function login() {
     var upwd=$('#upwd').val();
     var url='';
     if (uname!=null&&upwd!=null){
-        url='/users/{uname}/{upwd}';
+        url='/users/${uname}/${upwd}';
     }else {
         alert("账号密码不能为空");
     }

@@ -2,6 +2,7 @@ package com.order.orderings.mapper;
 
 import com.order.orderings.pojo.Ordering;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -40,5 +41,9 @@ public interface OrderingsMapper {
     @Select("select oid,uid,bname,bphone,address,amount,pay,orderstatus,createtime,updatetime from ordering")
     public List<Ordering> queryAll();
 
+    //带条件查询订单
+    public List<Ordering> queryAllBy(@Param("start") Integer start, @Param("size") Integer size, @Param("keyword") String keyword);
 
+    //带条件总记录数
+    public int count(@Param("keyword") String keyword);
 }

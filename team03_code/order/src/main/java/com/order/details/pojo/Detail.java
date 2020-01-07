@@ -8,10 +8,11 @@ import com.order.orderings.pojo.Ordering;
 public class Detail {
     private Integer did;//订单详情ID
     private Integer fid;//菜品ID
-    private String oid;//引用订单表
+    private String oid;//订单编号
     private String dname;//当前菜品名
     private Float dprice;//菜品当前价格
     private String dphoto;//菜品图片
+
     private Integer quantity;//订购菜品数量
 
 
