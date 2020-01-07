@@ -32,6 +32,7 @@ public class OrderingsController {
     //取消订单（必需有uid与oid两个属性）ok
     @PutMapping("/cancel")
     public int cancel(@RequestBody Ordering ordering){
+        System.out.println(11111);
         return service.cancel(ordering);
     }
 
@@ -59,4 +60,18 @@ public class OrderingsController {
         return service.queryAll();
     }
 
+    //条件查询订单ok
+    @RequestMapping(value = {"/order/{page}/{pageSize}/{keyword}","/order/{page}/{pageSize}/","/order/{page}/{pageSize}"}, method = RequestMethod.GET)
+    public List<Ordering> queryAllBy(@PathVariable("page") Integer page,@PathVariable("pageSize") Integer pageSize,@PathVariable(name="keyword",required = false)String keyword){
+        return service.queryAllBy(page,pageSize,keyword);
+    }
+    /**
+     * 得到总记录数
+     * @return
+     */
+    @GetMapping({"/order/count/{keyword}","/order/count/","/order/count"})
+    public int count(@PathVariable(required = false,value = "keyword") String keyword){
+        return service.count(keyword);
+    }
 }
+

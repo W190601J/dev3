@@ -13,6 +13,7 @@
     <script type="text/javascript" src="./js/xadmin.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
+    <script src="./js/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]--></head>
@@ -20,7 +21,7 @@
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form" enctype="multipart/form-data">
+        <form class="layui-form" id="form1" enctype="multipart/form-data">
             <div class="layui-form-item">
                 <label  class="layui-form-label">
                     <span class="x-red">*</span>菜式id</label>
@@ -61,7 +62,7 @@
 </div>
 <div class="layui-form-item">
     <label class="layui-form-label"></label>
-    <button class="layui-btn" lay-filter="add" lay-submit="">增加</button></div>
+    <button class="layui-btn" lay-filter="add" onclick="add()">增加</button></div>
 </form>
 </div>
 </div>
@@ -70,27 +71,42 @@
         $ = layui.jquery;
         var form = layui.form,
             layer = layui.layer;
-
-        //自定义验证规则
-        form.verify({
-            nikename: function(value) {
-                if (value.length < 5) {
-                    return '昵称至少得5个字符啊';
-                }
-            },
-            pass: [/(.+){6,12}$/, '密码必须6到12位'],
-            repass: function(value) {
-                if ($('#L_pass').val() != $('#L_repass').val()) {
-                    return '两次密码不一致';
-                }
-            }
-        });
-
-        //监听提交
-
-
     });
+function add() {
+    let form = document.querySelector('#form1');
+    let formData = new FormData(form);
+    $.ajax({
+        method: 'post',
+        url: 'http://localhost:8080/class/addClass',
+        data: formData,
+        success: function (data) {
+            if (data == 1) {
+                layer.msg('添加成功',{
+                    icon:1,
+                    time: 1000
+                }, function() {
+                    parent.location.reload();
+                    //var index = parent.layer.getFrameIndex(window.name); // 先得到当前iframe层的索引
+                    //parent.layer.close(index); // 再执行关闭
+
+                });
+
+
+            }
+        },
+        //默认值为："application/x-www-form-urlencoded
+        //设置false表示忽略这个参数
+        contentType: false,
+        //该参数默认为true,设置false表示以对象的方式发送，而非字符串
+        processData: false,
+        dataType: 'text'
+    })
+
+
+
+}
 </script>
+
 <script>var _hmt = _hmt || []; (function() {
     var hm = document.createElement("script");
     hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";

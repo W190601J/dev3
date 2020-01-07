@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface FoodsMapper {
     //添加菜品信息,方法已测
-    @Insert("INSERT INTO food (fname,cnumber,price,fphoto,finfo,cstock) VALUES (#{fname},#{cnumber},#{price},#{fphoto},#{finfo},#{cstock})")
+    @Insert("INSERT INTO food (fid,fname,cnumber,price,fphoto,finfo,cstock) VALUES (#{fid},#{fname},#{cnumber},#{price},#{fphoto},#{finfo},#{cstock})")
     public int addFood(Food food);
 
     //删除菜品信息,方法已测
@@ -19,8 +19,8 @@ public interface FoodsMapper {
     public int updateFood(Food food);
 
     //查询全部菜品信息(需加上分页)，已测试
-    @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus,fcreate,fupdate FROM food")
-    public List<Food> queryFood();
+    @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus,fcreate,fupdate FROM food where cnumber=#{cnumber} limit #{start},#{size}")
+    public List<Food> queryFood(@Param("cnumber") Integer cnumber,@Param("start") Integer start, @Param("size") Integer size);
 
     //按照菜品id查询菜品信息,已测试
     @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus,fcreate,fupdate FROM food WHERE fid=#{fid}")
@@ -51,6 +51,9 @@ public interface FoodsMapper {
      * keyword：查询条件
      * 菜品分页查询（带查询条件）
      */
-
-    public List<Food> findFood(@Param("start") Integer start, @Param("size") Integer size, @Param("keyword") String keyword);
+    @Select("SELECT fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus,fcreate,fupdate FROM food where cnumber=#{cnumber} limit #{start},#{size}")
+    public List<Food> findFood(@Param("cnumber") Integer cnumber,@Param("start") Integer start, @Param("size") Integer size);
+    //获得总记录数，需要区分菜式
+    @Select("SELECT count(1) FROM food where cnumber=#{cnumber}")
+    public int querytt(@Param("cnumber")Integer cnumber);
 }

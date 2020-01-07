@@ -28,5 +28,8 @@ public interface ChefMapper {
      * 厨师分页查询（带查询条件）
      */
     //测试已经通过
-    public List<Chef> findChef(@Param("start") Integer start, @Param("size") Integer size, @Param("keyword") String keyword);
+    public List<Chef> findChef(@Param("start") Integer start, @Param("size") Integer size);
+    //查询总记录数
+    @Select("SELECT count(1) FROM chef")
+    public int querytt();
 }

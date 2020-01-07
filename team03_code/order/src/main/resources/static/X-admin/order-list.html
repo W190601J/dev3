@@ -31,40 +31,20 @@
                     <div class="layui-card">
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5">
+
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input class="layui-input" placeholder="开始日" name="start" id="start"></div>
+                                    <input type="text" id="suosou" placeholder="请输入搜索条件" autocomplete="off" class="layui-input"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input class="layui-input" placeholder="截止日" name="end" id="end"></div>
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <select name="contrller">
-                                        <option>支付方式</option>
-                                        <option>支付宝</option>
-                                        <option>微信</option>
-                                        <option>货到付款</option></select>
-                                </div>
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <select name="contrller">
-                                        <option value="">订单状态</option>
-                                        <option value="0">待确认</option>
-                                        <option value="1">已确认</option>
-                                        <option value="2">已收货</option>
-                                        <option value="3">已取消</option>
-                                        <option value="4">已完成</option>
-                                        <option value="5">已作废</option></select>
-                                </div>
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="username" placeholder="请输入订单号" autocomplete="off" class="layui-input"></div>
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <button class="layui-btn" lay-submit="" lay-filter="sreach">
-                                        <i class="layui-icon">&#xe615;</i></button>
+                                    <button class="layui-btn" id="ss" type="button" lay-filter="sreach">
+                                    <i class="layui-icon">&#xe615;</i></button>
                                 </div>
                             </form>
                         </div>
                         <div class="layui-card-header">
 <!--                            <button class="layui-btn layui-btn-danger" onclick="delAll()">-->
 <!--                                <i class="layui-icon"></i>批量删除</button>-->
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
-                                <i class="layui-icon"></i>添加</button></div>
+<!--                            <button class="layui-btn" onclick="xadmin.open('添加用户','./order-query.html',800,600)">-->
+<!--                                <i class="layui-icon"></i>添加</button></div>-->
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form">
                                 <thead>
@@ -83,48 +63,53 @@
 
                                 </tbody>
                             </table>
+                            <!--用于分页-->
+                            <div class="text-c" id="page"></div>
                         </div>
-                        <!--用于分页-->
-                        <div class="text-c" id="page"></div>
+
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+        </div>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script>
-        layui.use(['laypage', 'layer'], function () {
-            let laypage = layui.laypage; //分页插件
-            let layer = layui.layer;//消息框
 
-            let counts = count(null);//总记录数
+            layui.use(['laypage', 'layer'], function () {
+                let laypage = layui.laypage; //分页插件
+                let layer = layui.layer;//消息框
 
-            laypage.render({
-                elem: 'page',//注意：这里的page为id，但不能有#
-                count: counts,
-                curr: 1,
-                limit: 5,
-                groups: 5, //连续出现的页码数量
-                limits: [5, 10, 15, 20, 25],
-                jump: function (res, first) { //触发分页后的回调
-                    console.log(res)
-                    let page = res.curr;//当前页
-                    let pageSize = res.limit;//每页显示记录数
+                let counts = count(null);//总记录数
+                  laypage.render({
+                    elem: 'page',//注意：这里的page为id，但不能有#
+                    count: counts,
+                    curr: 1,
+                    limit: 5,
+                    groups: 5, //连续出现的页码数量
+                    limits: [5, 10, 15, 20, 25],
+                    jump: function (res, first) { //触发分页后的回调
+                        let page = res.curr;//当前页
+                        let pageSize = res.limit;//每页显示记录数
 
-                    //从输入框中获得查询条件
-                    let keyword = $('#txt-search').val();
-                    loadData(page, pageSize, keyword);
-                }
+                        //从输入框中获得查询条件
+                        let keyword = $('#suosou').val();
+                        loadData(page, pageSize, keyword);
+                    }
+                })
+                // //查看订单详情
+                // $('#chakan').on('click', function () {
+                //     saveCard();
+                // })
+
+                //搜索订单
+                $('#ss').on('click',function(){
+                    search();
+                })
             })
-            //查看订单详情
-            $('#chakan').on('click', function () {
-                saveCard();
-            })
 
-            //删除订单
-            $('#del').on('click',function(){
-                search();
-            })
-        })
+
+
 
         /**
          * 获得总记录数，注意：该方法必须同步执行
@@ -133,11 +118,10 @@
         function count(keyword) {
             let record = 0;
 
-            let url = '../../?';
+            let url = '../../ordering/order/count/';
             if (keyword != null) {
-                url = `../../?/${keyword}`;
+                url = `../../ordering/order/count/${keyword}`;
             }
-
             //得到当前总记录数
             $.ajax({
                 method: 'get',
@@ -148,9 +132,7 @@
                 },
                 dataType: 'text'
             });
-
             return record;
-
         }
         /**
          * 加载数据
@@ -160,9 +142,9 @@
          */
         function loadData(page, pageSize, keyword) {
 
-            let url = `../../?/${page}/${pageSize}/`;
+            let url = `/ordering/order/${page}/${pageSize}/`;
             if (keyword != null) {
-                url = `../../?/${page}/${pageSize}/${keyword}`;
+                url = `/ordering/order/${page}/${pageSize}/${keyword}`;
             }
             $.ajax({
                 method: 'get',
@@ -186,16 +168,15 @@
                     <td>${v.oid}</td>
                     <td>${v.bname}</td>
                     <td>${v.bphone}</td>
-                    <td>${v.phone}</td>
                     <td>${v.address}</td>
                     <td>${v.amount}</td>
-                    <td>${v.pay== 0 ? '支付' : v.gender == 1 ? '未支付'}</td>
-                    <td>${v.orderstatus== 0 ? '新订单' : v.gender == 1 ? '完结订单': v.gender == 2 ? '取消订单'}</td>
+                    <td>${v.pay== 0 ? '支付' : '未支付'}</td>
+                    <td>${v.orderstatus== 0 ? '新订单' : v.gender == 1 ? '完结订单': '取消订单'}</td>
                     <td>${v.createtime}</td>
                     <td class="td-manage">
-                                            <a title="查看" id="chakan" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
+                                            <a title="查看" id="chakan" onclick="edit(${v.oid})" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>
-                                            <a title="删除" id="del" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                            <a title="取消" id="del" onclick="quxiao(${v.oid},${v.uid})" href="javascript:;">
                                                 <i class="layui-icon">&#xe640;</i></a>
                                         </td>
 
@@ -214,9 +195,47 @@
          * 搜索
          */
         function search() {
-            let keyword = $('#txt-search').val();
+            let keyword = $('#suosou').val();
             loadData(1, 5, keyword);
         }
-</script>
+        function edit(oid) {
+                layer.open({
+                    type: 2,
+                    content: 'order-query.html?oid=' + oid,
+                    area: ['1100px', '600px']
+                });
+            }
 
+            /**
+             * 取消订单
+             * @param oid
+             * @param uid
+             */
+            function quxiao(oid,uid) {
+               // layer.confirm('确认要取消'+oid+'订单吗？');
+                let Ordering1 = {
+                    oid: oid,
+                    uid: uid,
+                }
+                //obj.dept=dept;
+                //将JSON对象转换成JSON字符串
+                let s = JSON.stringify(Ordering1);
+                $.ajax({
+                    method:'put',
+                    url:'../../ordering/cancel',
+                    data:s,
+                    success:function (data) {
+                        alert(data);
+                        if(data==1){
+                            loadData(1, 5, keyword);
+                        }else {
+                            layer.confirm('取消'+oid+'订单失败');
+                        }
+                    },
+                    contentType:'application/json;charset=utf-8',
+                    dataType:'text',
+                })
+            }
+</script>
+    </body>
 </html>

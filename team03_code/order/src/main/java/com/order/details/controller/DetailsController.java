@@ -23,4 +23,13 @@ public class DetailsController {
         return service.findAll(oid);
     }
 
+    @GetMapping("/sum/{fid}")
+    public int Sum(@PathVariable("fid") Integer fid){
+        return service.Sum(fid);
+    }
+
+    @GetMapping("/sumtotal/{month}")
+    public int SumTotal(Integer month){
+        return service.SumTotal(month);
+    }
 }

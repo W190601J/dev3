@@ -21,4 +21,14 @@ public class DetailsServiceImpl implements DetailsService {
     public List<Detail> findAll(String oid) {
         return dao.findAll(oid);
     }
+
+    @Override
+    public int Sum(Integer fid) {
+        return dao.Sum(fid);
+    }
+
+    @Override
+    public int SumTotal(Integer month) {
+        return dao.SumTotal(month);
+    }
 }

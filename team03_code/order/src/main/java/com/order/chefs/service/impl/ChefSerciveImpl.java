@@ -33,12 +33,17 @@ public class ChefSerciveImpl implements ChefService {
     }
 
     @Override
-    public List<Chef> findChef(Integer page, Integer pageSize, String keyword) {
+    public List<Chef> findChef(Integer page, Integer pageSize) {
         //计算查询范围
 
         int start = (page - 1) * pageSize;
         int size = pageSize;
 
-        return chefMapper.findChef(start, size,keyword);
+        return chefMapper.findChef(start, size);
+    }
+
+    @Override
+    public int querytt() {
+        return chefMapper.querytt();
     }
 }

@@ -3,6 +3,7 @@ package com.order.foods.service.impl;
 import com.order.foods.mapper.FoodsMapper;
 import com.order.foods.pojo.Food;
 import com.order.foods.service.FoodsService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +30,11 @@ public class FoodsServiceImpl implements FoodsService {
     }
 
     @Override
-    public List<Food> queryFood() {
-        return foodsMapper.queryFood();
+    public List<Food> queryFood(Integer cnumber,Integer page,Integer pageSize) {
+        //计算查询范围
+        int start = (page - 1) * pageSize;
+        int size = pageSize;
+        return foodsMapper.queryFood(cnumber,start,size);
     }
 
     @Override
@@ -69,10 +73,15 @@ public class FoodsServiceImpl implements FoodsService {
     }
 
     @Override
-    public List<Food> findFood(Integer page, Integer pageSize, String keyword) {
+    public List<Food> findFood(Integer page, Integer pageSize,Integer cnumber) {
         //计算查询范围
         int start = (page - 1) * pageSize;
         int size = pageSize;
-        return foodsMapper.findFood(start, size,keyword);
+        return foodsMapper.findFood(start,size,cnumber);
+    }
+
+    @Override
+    public int querytt(Integer cnumber) {
+        return foodsMapper.querytt(cnumber);
     }
 }

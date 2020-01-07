@@ -32,9 +32,6 @@
     <!-- public List<Chef> findChef(@Param("start") Integer start, @Param("size") Integer size, @Param("keyword") String keyword);-->
     <select id="findChef" resultType="com.order.chefs.pojo.Chef">
         select chid,cname,cinfo,cphoto,ccreate,cupdate from chef
-        <if test="keyword!=null">
-            where cname like '%${keyword}%' or cinfo like '%${keyword}%'
-        </if>
         limit #{start},#{size}
     </select>
 

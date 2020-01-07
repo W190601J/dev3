@@ -31,40 +31,10 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5">
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <input class="layui-input" placeholder="开始日" name="start" id="start"></div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <input class="layui-input" placeholder="截止日" name="end" id="end"></div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <select name="contrller">
-                                <option>支付方式</option>
-                                <option>支付宝</option>
-                                <option>微信</option>
-                                <option>货到付款</option></select>
-                        </div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <select name="contrller">
-                                <option value="">订单状态</option>
-                                <option value="0">待确认</option>
-                                <option value="1">已确认</option>
-                                <option value="2">已收货</option>
-                                <option value="3">已取消</option>
-                                <option value="4">已完成</option>
-                                <option value="5">已作废</option></select>
-                        </div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <input type="text" name="username" placeholder="请输入订单号" autocomplete="off" class="layui-input"></div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="sreach">
-                                <i class="layui-icon">&#xe615;</i></button>
-                        </div>
-                    </form>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                        <i class="layui-icon"></i>批量删除</button>
-                    <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
+
+                    <button class="layui-btn" onclick="xadmin.open('添加用户','./foodadd.html',800,600)">
                         <i class="layui-icon"></i>添加</button></div>
                 <div class="layui-card-body ">
                     <table class="layui-table layui-form">
@@ -84,128 +54,72 @@
                             <th>操作</th></tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>2017009171822298053</td>
-                            <td>老王:18925139194</td>
-                            <td>7829.10</td>
-                            <td>7854.10</td>
-                            <td>待确认</td>
-                            <td>未支付</td>
-                            <td>未发货</td>
-                            <td>其他方式</td>
-                            <td>申通物流</td>
-                            <td>2017-08-17 18:22</td>
-                            <td class="td-manage">
-                                <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
-                                    <i class="layui-icon">&#xe63c;</i></a>
-                                <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                    <i class="layui-icon">&#xe640;</i></a>
-                            </td>
-                        </tr>
-
                         </tbody>
                     </table>
                 </div>
-                <div class="layui-card-body ">
-                    <div class="page">
-                        <div>
-                            <a class="prev" href="">&lt;&lt;</a>
-                            <a class="num" href="">1</a>
-                            <span class="current">2</span>
-                            <a class="num" href="">3</a>
-                            <a class="num" href="">489</a>
-                            <a class="next" href="">&gt;&gt;</a></div>
-                    </div>
-                </div>
+                <div class="text-c" id="page" style="margin-left: 600px"></div>
             </div>
         </div>
     </div>
 </div>
 </body>
-<script>layui.use(['laydate', 'form'],
-    function() {
-        var laydate = layui.laydate;
+<script>layui.use(['laypage', 'layer'],
+    function () {
+        let laypage = layui.laypage; //分页插件
+        let layer = layui.layer;//消息框
 
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#start' //指定元素
-        });
+        let counts = count(null);//总记录数
 
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#end' //指定元素
-        });
-        //loadData(1,10);
-    });
+        //在页面显总记录数
+        $('#dataLength').text(counts);
 
-/*用户-停用*/
-function member_stop(obj, id) {
-    layer.confirm('确认要停用吗？',
-        function(index) {
+        laypage.render({
+            elem: 'page',//注意：这里的page为id，但不能有#
+            count: counts,
+            curr: 1,
+            limit: 4,
+            groups:10, //连续出现的页码数量
+            limits: [10, 20, 30, 40, 50],
+            jump: function (res, first) { //触发分页后的回调
+                console.log(res)
 
-            if ($(obj).attr('title') == '启用') {
+                let page = res.curr;//当前页
+                let pageSize = res.limit;//每页显示记录数
 
-                //发异步把用户状态进行更改
-                $(obj).attr('title', '停用');
-                $(obj).find('i').html('&#xe62f;');
 
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!', {
-                    icon: 5,
-                    time: 1000
-                });
+                //从输入框中获得查询条件
+                let keyword=$('#txt-search').val();
+                loadData(page, pageSize);
 
-            } else {
-                $(obj).attr('title', '启用');
-                $(obj).find('i').html('&#xe601;');
 
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!', {
-                    icon: 5,
-                    time: 1000
-                });
             }
-
-        });
-}
-function loadData(page, pageSize, keyword) {
-
-    let url = `http://localhost:8080/class/queryCuisine`;
-    if (keyword != null) {
-        url = `class/${page}/${pageSize}/${keyword}`;
-    }
-
+        })
+    });
+function loadData(page, pageSize) {
+    let url = `http://localhost:8080/foods/queryFood/${page}/${pageSize}/2`;
     $.ajax({
         method: 'get',
-        url: 'http://localhost:8080/class/queryCuisine',
+        url: url,
         success: function (data) {
             let tr = '';
             $.each(data, (i, v) => {
-                //判断状态:已启用、已停用
-                //     let info = '';
-                // let infoCls = '';
-                // if (v.doexist == 0) {
-                //     info = '已停用';
-                //     infoCls = 'btn btn-warning';
-                // } else if (v.doexist == 1) {
-                //     info = '已启用';
-                //     infoCls = 'btn btn-success';
-                // }
                 tr += `
                 <tr>
                     <td>${v.fid}</td>
                     <td>${v.fname}</td>
                     <td>${v.cnumber}</td>
                     <td>${v.price}</td>
-                    <td>${v.fphoto}</td>
+                    <td><img src="http://localhost:8080/foods/img/${v.fid}"></td>
                     <td>${v.finfo}</td>
                     <td>${v.fsell}</td>
                     <td>${v.cstock}</td>
-                    <td>${v.fstatus}</td>
+                    <td>${v.fstatus==0?'上架':'下架'}</td>
                     <td>${v.fcreate}</td>
                     <td>${v.fupdate}</td>
                     <td class="td-manage">
-                         <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                         <a title="编辑" onclick="xadmin.open('编辑','./foodedit.html?cid='+${v.fid},800,600)">
+                         <i class="layui-icon">&#xe642;</i></a>
+                         <a title="删除" onclick="member_del(this,${v.fid})" href="javascript:;">
                          <i class="layui-icon">&#xe640;</i></a>
                     </td>
 
@@ -213,40 +127,70 @@ function loadData(page, pageSize, keyword) {
 
                 `
             })
-
             $('tbody').html(tr);
-
-
         },
         dataType: 'json'
 
     })
 }
+/**
+ * 获得总记录数，注意：该方法必须同步执行
+ *
+ */
+function count(keyword) {
+    let record = 0;
+
+    let url = 'http://localhost:8080/foods/querytt/2';
+
+
+    //得到当前总记录数
+    $.ajax({
+        method: 'get',
+        url: url,
+        async: false,
+        success: function (data) {
+            record = Number(data);
+        },
+        dataType: 'text'
+    });
+
+    return record;
+
+}
 /*用户-删除*/
 function member_del(obj, id) {
+    console.log(id);
     layer.confirm('确认要删除吗？',
-        function(index) {
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!', {
-                icon: 1,
-                time: 1000
-            });
+        function de(index) {
+            del(id);
+
         });
 }
+function del(id) {
+    //发异步删除数据
+    let url = `http://localhost:8080/foods/${id}`;
+    console.log(url);
+    $.ajax({
+        method: 'delete',
+        url: url,
+        success: function (data) {
+            if(data==1){
+                layer.msg('已删除!', {
+                    icon: 1,
+                    time: 1000
+                });
+                queryFood();
+            }else{
+                layer.msg('删除失败！',{
+                    icon:5,
+                    time: 1000
+                })
+            }
+        },
+        dataType: 'text'
+    })
+}
 
-function delAll(argument) {
-
-    var data = tableCheck.getData();
-
-    layer.confirm('确认要删除吗？' + data,
-        function(index) {
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {
-                icon: 1
-            });
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-}</script>
+</script>
 
 </html>

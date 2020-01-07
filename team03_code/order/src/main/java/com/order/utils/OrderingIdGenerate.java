@@ -26,7 +26,4 @@ public class OrderingIdGenerate {
 		return y;
 		
 	}
-	
-
-
 }

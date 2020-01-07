@@ -187,4 +187,17 @@ public class OrderingsServiceImpl implements OrderingsService {
     public List<Ordering> queryAll() {
         return dao.queryAll();
     }
+
+    @Override
+    public List<Ordering> queryAllBy(Integer page, Integer pageSize, String keyword) {
+        //计算查询范围
+        int start = (page - 1) * pageSize;
+        int size = pageSize;
+        return dao.queryAllBy(start, size,keyword);
+    }
+
+    @Override
+    public int count(String keyword) {
+        return dao.count(keyword);
+    }
 }
