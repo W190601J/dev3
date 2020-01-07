@@ -31,28 +31,6 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5">
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <input class="layui-input" placeholder="开始日" name="start" id="start"></div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <input class="layui-input" placeholder="截止日" name="end" id="end"></div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <select name="contrller">
-                                <option value="">订单状态</option>
-                                <option value="0">待确认</option>
-                                <option value="1">已确认</option>
-                                <option value="2">已收货</option>
-                                <option value="3">已取消</option>
-                                <option value="4">已完成</option>
-                                <option value="5">已作废</option></select>
-                        </div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <input type="text" name="username" placeholder="请输入订单号" autocomplete="off" class="layui-input"></div>
-                        <div class="layui-input-inline layui-show-xs-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="sreach">
-                                <i class="layui-icon">&#xe615;</i></button>
-                        </div>
-                    </form>
                 </div>
                 <div class="layui-card-header">
 
@@ -79,39 +57,46 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="layui-card-body ">
-                    <div class="page">
-                        <div>
-                            <a class="prev" href="">&lt;&lt;</a>
-                            <a class="num" href="">1</a>
-                            <span class="current">2</span>
-                            <a class="num" href="">3</a>
-                            <a class="num" href="">489</a>
-                            <a class="next" href="">&gt;&gt;</a></div>
-                    </div>
-                </div>
+                <div class="text-c" id="page" style="margin-left: 600px"></div>
             </div>
         </div>
     </div>
 </div>
 </body>
-<script>layui.use(['laydate', 'form'],
-    function() {
-        var laydate = layui.laydate;
+<script>layui.use(['laypage', 'layer'],
+    function () {
+        let laypage = layui.laypage; //分页插件
+        let layer = layui.layer;//消息框
 
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#start' //指定元素
-        });
+        let counts = count(null);//总记录数
 
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#end' //指定元素
-        });
-        queryFood();
+        //在页面显总记录数
+        $('#dataLength').text(counts);
+
+        laypage.render({
+            elem: 'page',//注意：这里的page为id，但不能有#
+            count: counts,
+            curr: 1,
+            limit: 4,
+            groups:10, //连续出现的页码数量
+            limits: [10, 20, 30, 40, 50],
+            jump: function (res, first) { //触发分页后的回调
+                console.log(res)
+
+                let page = res.curr;//当前页
+                let pageSize = res.limit;//每页显示记录数
+
+
+                //从输入框中获得查询条件
+                let keyword=$('#txt-search').val();
+                loadData(page, pageSize);
+
+
+            }
+        })
     });
-function queryFood() {
-    let url = `http://localhost:8080/foods/queryFood/6`;
+function loadData(page, pageSize) {
+    let url = `http://localhost:8080/foods/queryFood/${page}/${pageSize}/6`;
     $.ajax({
         method: 'get',
         url: url,
@@ -147,6 +132,30 @@ function queryFood() {
         dataType: 'json'
 
     })
+}
+/**
+ * 获得总记录数，注意：该方法必须同步执行
+ *
+ */
+function count(keyword) {
+    let record = 0;
+
+    let url = 'http://localhost:8080/foods/querytt/6';
+
+
+    //得到当前总记录数
+    $.ajax({
+        method: 'get',
+        url: url,
+        async: false,
+        success: function (data) {
+            record = Number(data);
+        },
+        dataType: 'text'
+    });
+
+    return record;
+
 }
 /*用户-删除*/
 function member_del(obj, id) {

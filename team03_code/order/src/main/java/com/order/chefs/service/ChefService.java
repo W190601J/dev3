@@ -16,5 +16,6 @@ public interface ChefService  {
     //按照id查询厨师信息
     public Chef queryChefById(@Param("chid")Integer chid);
     //分页带条件查询
-    public List<Chef> findChef(Integer page, Integer pageSize, String keyword);
+    public List<Chef> findChef(Integer page, Integer pageSize);
+    public int querytt();
 }

@@ -10,9 +10,7 @@
           content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/xadmin.css">
-    <script src="./js/jquery-3.3.1.min.js"></script>
-    <script src="./lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./js/xadmin.js"></script>
+
 
 </head>
 
@@ -80,43 +78,53 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="layui-card-body ">
-                    <div class="page">
-                        <div>
-                            <a class="prev" href="">&lt;&lt;</a>
-                            <a class="num" href="">1</a>
-                            <span class="current">2</span>
-                            <a class="num" href="">3</a>
-                            <a class="num" href="">489</a>
-                            <a class="next" href="">&gt;&gt;</a></div>
-                    </div>
-                </div>
+                <div class="text-c" id="page" style="margin-left: 500px"></div>
             </div>
         </div>
     </div>
 </div>
 </body>
-<script>layui.use(['laydate', 'form'],
+<script src="./js/jquery-3.3.1.min.js"></script>
+<script src="./lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="./js/xadmin.js"></script>
+<script>
+    layui.use(['laypage', 'layer'],
     function () {
-        var laydate = layui.laydate;
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#start' //指定元素
-        });
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#end' //指定元素
-        });
-        loadData(1,10);
+        let laypage = layui.laypage; //分页插件
+        let layer = layui.layer;//消息框
+
+        let counts = count(null);//总记录数
+
+        //在页面显总记录数
+        $('#dataLength').text(counts);
+
+        laypage.render({
+            elem: 'page',//注意：这里的page为id，但不能有#
+            count: counts,
+            curr: 1,
+            limit: 4,
+            groups:10, //连续出现的页码数量
+            limits: [10, 20, 30, 40, 50],
+            jump: function (res, first) { //触发分页后的回调
+                console.log(res)
+
+                let page = res.curr;//当前页
+                let pageSize = res.limit;//每页显示记录数
+
+
+                //从输入框中获得查询条件
+                let keyword=$('#txt-search').val();
+                loadData(page, pageSize, keyword);
+
+
+            }
+        })
     });
 function loadData(page, pageSize, keyword) {
-    let url = `queryCuisine`;
-    if (keyword != null) {
-        url = `class/${page}/${pageSize}/${keyword}`;
-    }
+
     $.ajax({
         method: 'get',
-        url: 'http://localhost:8080/class/queryCuisine',
+        url: `http://localhost:8080/class/${page}/${pageSize}`,
         success: function (data) {
             let tr = '';
             $.each(data, (i, v) => {
@@ -145,6 +153,30 @@ function loadData(page, pageSize, keyword) {
         dataType: 'json'
 
     })
+}
+/**
+ * 获得总记录数，注意：该方法必须同步执行
+ *
+ */
+function count(keyword) {
+    let record = 0;
+
+    let url = 'http://localhost:8080/class/queryCountt';
+
+
+    //得到当前总记录数
+    $.ajax({
+        method: 'get',
+        url: url,
+        async: false,
+        success: function (data) {
+            record = Number(data);
+        },
+        dataType: 'text'
+    });
+
+    return record;
+
 }
 /*用户-删除*/
 function member_del(obj, id) {

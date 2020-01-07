@@ -138,23 +138,23 @@ public class FoodsController {
         return a;
     }
     //查询所有
-    @RequestMapping(value = "/queryFood/{cnumber}",method = RequestMethod.GET)
-    public ResponseEntity<?> queryFood(@PathVariable("cnumber")Integer cnumber){
-        List<Food> l1=fs.queryFood(cnumber);
+    @RequestMapping(value = "/queryFood/{page}/{pageSize}/{cnumber}",method = RequestMethod.GET)
+    public ResponseEntity<?> queryFood(@PathVariable("page") Integer page, @PathVariable("pageSize") Integer pageSize,@PathVariable("cnumber")Integer cnumber){
+        List<Food> l1=fs.queryFood(cnumber,page,pageSize);
         if(l1==null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(l1,HttpStatus.OK);
     }
     //带条件分页查询
-//    @RequestMapping(value = {"/{page}/{pageSize}/{keyword}","/{page}/{pageSize}"},method = RequestMethod.GET)
-//    public ResponseEntity<List<Food>> find(@PathVariable("page") Integer page, @PathVariable("pageSize") Integer pageSize, @PathVariable(name="keyword",required = false)String keyword){
-//        List<Food> foodList = fs.findFood(page,pageSize,keyword);
-//        if (foodList.isEmpty()) {
-//            return new ResponseEntity(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<List<Food>>(foodList, HttpStatus.OK);
-//    }
+    @RequestMapping(value = "/{page}/{pageSize}/{cnumber}",method = RequestMethod.GET)
+    public ResponseEntity<?> find(@PathVariable("page") Integer page, @PathVariable("pageSize") Integer pageSize,@PathVariable("cnumber") Integer cnumber){
+        List<Food> foodList = fs.findFood(page,pageSize,cnumber);
+        if (foodList.isEmpty()) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<List<Food>>(foodList, HttpStatus.OK);
+    }
     //显示图片
     @GetMapping("/img/{mid}")
     public void img(@PathVariable("mid") Integer mid, OutputStream out) throws IOException {
@@ -171,5 +171,11 @@ public class FoodsController {
     public ResponseEntity<Food> queryById(@PathVariable("fid") Integer fid){
         Food food=fs.queryFoodById(fid);
         return new ResponseEntity<>(food,HttpStatus.OK);
+    }
+    //获得总记录数
+    @GetMapping("/querytt/{cnumber}")
+    public int querytt(@PathVariable("cnumber") Integer cnumber){
+        int i= fs.querytt(cnumber);
+        return i;
     }
 }

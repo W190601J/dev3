@@ -20,11 +20,12 @@ public interface ClassesService {
     public Cuisine queryCuisineById(Integer cid);
     //根据Cnumber查询类型信息
     public Cuisine queryCuisineByNumber(@Param("cnumber")Integer cnumber);
+    public int queryCount();
     /**
      * start：起始位置
      * size：查询条数
      * keyword：查询条件
      * 菜品类型分页查询（带查询条件）
      */
-    public List<Cuisine> findClasses(Integer page, Integer pageSize, String keyword);
+    public List<Cuisine> findClasses(Integer page, Integer pageSize);
 }

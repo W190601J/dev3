@@ -138,12 +138,9 @@ public class ChefController {
     }
 
     //带条件分页查询
-    @RequestMapping(value = {"/{page}/{pageSize}/{keyword}","/{page}/{pageSize}"},method = RequestMethod.GET)
-     public ResponseEntity<List<Chef>> find(@PathVariable("page") Integer page,@PathVariable("pageSize") Integer pageSize,@PathVariable(name="keyword",required = false)String keyword){
-        log.info("page:{}",page);
-        log.info("pageSize:{}",pageSize);
-        log.info("keyword:{}",keyword);
-        List<Chef> chefList = ci.findChef(page,pageSize,keyword);
+    @RequestMapping(value = {"/{page}/{pageSize}"},method = RequestMethod.GET)
+     public ResponseEntity<List<Chef>> find(@PathVariable("page") Integer page,@PathVariable("pageSize") Integer pageSize){
+        List<Chef> chefList = ci.findChef(page,pageSize);
         if (chefList.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
@@ -159,5 +156,11 @@ public class ChefController {
         InputStream input=new FileInputStream(file);
         //用于显示一张图片
         FileCopyUtils.copy(input,out);
+    }
+    //查询总记录数
+    @GetMapping("querytt")
+    public int querytt(){
+        int i=ci.querytt();
+        return i;
     }
 }

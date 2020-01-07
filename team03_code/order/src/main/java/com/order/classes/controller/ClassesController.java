@@ -129,9 +129,9 @@ public class ClassesController {
     }
 
     //分页查询菜品类
-    @RequestMapping(value = {"{page}/{pageSize}/{keyword}","chef/{page}/{pageSize}"},method = RequestMethod.GET)
-    public  ResponseEntity<List<Cuisine>> findClasses(@PathVariable("page") Integer page, @PathVariable("pageSize") Integer pageSize, @PathVariable(name="keyword",required = false)String keyword) {
-        List<Cuisine> lc=cls.findClasses(page,pageSize,keyword);
+    @RequestMapping(value = {"{page}/{pageSize}"},method = RequestMethod.GET)
+    public  ResponseEntity<List<Cuisine>> findClasses(@PathVariable("page") Integer page, @PathVariable("pageSize") Integer pageSize) {
+        List<Cuisine> lc=cls.findClasses(page,pageSize);
         if (lc.isEmpty()) {
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
@@ -165,6 +165,12 @@ public class ClassesController {
         }
         return new ResponseEntity<>(cu,HttpStatus.OK);
 
+    }
+    //获取总记录数
+    @GetMapping("/queryCountt")
+    public int queryCount(){
+        int i=cls.queryCount();
+        return i;
     }
 
 }

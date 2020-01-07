@@ -24,6 +24,9 @@ public interface ClassesMapper {
     //按照Cnumber查询类型信息，方法已测
     @Select("SELECT cid,cnumber,cname,classcreate,classupdate FROM class WHERE cnumber=#{cnumber}")
     public Cuisine queryCuisineByNumber(@Param("cnumber")Integer cnumber);
+    //获取总记录数
+    @Select("select count(1) from class")
+    public int queryCount();
 
      /**
      * start：起始位置
@@ -31,6 +34,7 @@ public interface ClassesMapper {
      * keyword：查询条件
      * 菜品类型分页查询（带查询条件）
      */
-    public List<Cuisine> findClasses(@Param("start") Integer start, @Param("size") Integer size, @Param("keyword") String keyword);
+     @Select("SELECT cid,cnumber,cname,classcreate,classupdate,beiyong1 FROM class limit #{page},#{pageSize}")
+     public List<Cuisine> findClasses(@Param("page") Integer page, @Param("pageSize") Integer pageSize);
 
 }

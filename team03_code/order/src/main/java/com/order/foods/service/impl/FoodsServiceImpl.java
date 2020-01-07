@@ -30,8 +30,11 @@ public class FoodsServiceImpl implements FoodsService {
     }
 
     @Override
-    public List<Food> queryFood(@Param("cnumber")Integer cnumber) {
-        return foodsMapper.queryFood(cnumber);
+    public List<Food> queryFood(Integer cnumber,Integer page,Integer pageSize) {
+        //计算查询范围
+        int start = (page - 1) * pageSize;
+        int size = pageSize;
+        return foodsMapper.queryFood(cnumber,start,size);
     }
 
     @Override
@@ -70,10 +73,15 @@ public class FoodsServiceImpl implements FoodsService {
     }
 
     @Override
-    public List<Food> findFood(Integer page, Integer pageSize, String keyword) {
+    public List<Food> findFood(Integer page, Integer pageSize,Integer cnumber) {
         //计算查询范围
         int start = (page - 1) * pageSize;
         int size = pageSize;
-        return foodsMapper.findFood(start, size,keyword);
+        return foodsMapper.findFood(start,size,cnumber);
+    }
+
+    @Override
+    public int querytt(Integer cnumber) {
+        return foodsMapper.querytt(cnumber);
     }
 }

@@ -44,10 +44,15 @@ public class ClassesServiceImpl implements ClassesService {
     }
 
     @Override
-    public List<Cuisine> findClasses(Integer page, Integer pageSize, String keyword) {
+    public int queryCount() {
+        return classesMapper.queryCount();
+    }
+
+    @Override
+    public List<Cuisine> findClasses(Integer page, Integer pageSize) {
         //计算查询范围
         int start = (page - 1) * pageSize;
-        int size = pageSize;
-        return classesMapper.findClasses(start, size,keyword);
+        int end = pageSize;
+        return classesMapper.findClasses(start, end);
     }
 }
