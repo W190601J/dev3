@@ -35,7 +35,7 @@
                                 <div class="layui-input-inline layui-show-xs-block">
                                     <input type="text" id="suosou" placeholder="请输入搜索条件" autocomplete="off" class="layui-input"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <button class="layui-btn" id="ss" lay-submit="" lay-filter="sreach">
+                                    <button class="layui-btn" id="ss" type="button" lay-filter="sreach">
                                     <i class="layui-icon">&#xe615;</i></button>
                                 </div>
                             </form>
@@ -81,7 +81,7 @@
                 let layer = layui.layer;//消息框
 
                 let counts = count(null);//总记录数
-
+                 alert(counts);
                 laypage.render({
                     elem: 'page',//注意：这里的page为id，但不能有#
                     count: counts,
@@ -90,12 +90,10 @@
                     groups: 5, //连续出现的页码数量
                     limits: [5, 10, 15, 20, 25],
                     jump: function (res, first) { //触发分页后的回调
-                        console.log(res)
                         let page = res.curr;//当前页
                         let pageSize = res.limit;//每页显示记录数
 
                         //从输入框中获得查询条件
-                        alert("1++++++")
                         let keyword = $('#suosou').val();
                         loadData(page, pageSize, keyword);
                     }
@@ -180,7 +178,7 @@
                     <td class="td-manage">
                                             <a title="查看" id="chakan" onclick="edit(${v.oid})" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>
-                                            <a title="取消" id="del" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                            <a title="取消" id="del" onclick="quxiao(${v.oid},${v.uid})" href="javascript:;">
                                                 <i class="layui-icon">&#xe640;</i></a>
                                         </td>
 
@@ -208,6 +206,30 @@
                     content: 'order-query.html?oid=' + oid,
                     area: ['1100px', '600px']
                 });
+            }
+            function quxiao(oid,uid) {
+                layer.confirm('确认要取消'+oid+'订单吗？');
+                let Ordering1 = {
+                    oid: oid,
+                    uid: uid,
+                }
+                //obj.dept=dept;
+                //将JSON对象转换成JSON字符串
+                let Ordering = JSON.stringify(Ordering1);
+                $.ajax({
+                    method:'put',
+                    url:'/ordering/cancel',
+                    data:Ordering,
+                    success:function (data) {
+                        if(data==1){
+                            loadData(1, 5, keyword);
+                        }else {
+                            layer.confirm('取消'+oid+'订单失败');
+                        }
+
+                    },
+                    dataType:'text',
+                })
             }
 </script>
     </body>
