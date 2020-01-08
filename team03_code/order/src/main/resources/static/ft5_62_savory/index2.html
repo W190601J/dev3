@@ -45,6 +45,8 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="css/style.css">
+        <!-- layui.css -->
+	<link rel="stylesheet" href="layui/css/layui.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -67,20 +69,21 @@
 	
 					<!-- 导航条 开始 -->
 					<div class="row">
-						<div class="col-sm-8 col-xs-12">
-							<div id="gtco-logo"><a href="index.html">首页 <em>.</em></a></div>
+						<div class="col-sm-4 col-xs-12">
+							<div id="gtco-logo"><a href="index2.html">首页 <em>.</em></a></div>
 						</div>
 						<div class="col-xs-8 text-right menu-1">
 							<ul>
-								<li><a href="menu.html">菜单</a></li>
+								<li><a href="menu2.html">菜单</a></li>
 								<li class="has-dropdown">
-									<a href="services.html">服务</a>
+									<a href="services2.html">服务</a>
 									<ul class="dropdown">
 										<li><a href="waimai.html">外卖</a></li>
 									</ul>
 								</li>
-								<li><a href="contact.html">我们</a></li>
-								<li class="btn-cta"><a href="denlu.html"><span>登录</span></a></li>
+								<li><a href="contact2.html">我们</a></li>
+								<li class="btn-cta"><a href="huiyuan.html"><span>用户中心</span></a></li>
+							<li class="btn-cta"><a id="sde" href=""><i class="layui-icon layui-icon-about" style="font-size: 20px; color: rgb(255, 30, 30)" >退出</i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -99,63 +102,10 @@
 	
 							<div class="row row-mt-15em">
 								<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
-									<span class="intro-text-small">无极点单平台</span>
+									<span class="intro-text-small"><h1>无极点单平台</h1></span>
 									<h1 class="cursive-font">都很好吃！</h1>
 								</div>
-								<div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
-									<div class="form-wrap">
-										<div class="tab">
-	
-											<div class="tab-content">
-												<div class="tab-content-inner active" data-content="signup">
-													<h3 class="cursive-font">餐桌预定</h3>
-													<form action="#">
-														<div class="row form-group">
-															<div class="col-md-12">
-																<label for="activities">人数</label>
-																<select name="#" id="activities" class="form-control">
-																	<option value="">人数</option>
-																	<option value="">1</option>
-																	<option value="">2</option>
-																	<option value="">3</option>
-																	<option value="">4</option>
-																	<option value="">5+</option>
-																</select>
-															</div>
-														</div>
-														<div class="row form-group">
-															<div class="col-md-12">
-																<label for="date-start">日期</label>
-																<input type="text" id="date" class="form-control">
-															</div>
-														</div>
-														<div class="row form-group">
-															<div class="col-md-12">
-																<label for="date-start">时间</label>
-																<input type="text" id="time" class="form-control">
-															</div>
-														</div>
-														<div class="row form-group">
-																<div class="col-md-12">
-																	<label for="date-start">联系电话</label>
-																	<input type="text" id="" class="form-control">
-																</div>
-															</div>
-	
-														<div class="row form-group">
-															<div class="col-md-12">
-																<input type="button" class="btn btn-primary btn-block"
-																	value="立即预约">
-															</div>
-														</div>
-													</form>
-												</div>
-	
-	
-											</div>
-										</div>
-									</div>
-								</div>
+								
 							</div>
 	
 	
@@ -469,6 +419,8 @@
 
 	<!-- Stellar Parallax -->
 	<script src="js/jquery.stellar.min.js"></script>
+        <!-- layui.js -->
+	<script src="layui/layui.js"></script>
 
 	<!-- Magnific Popup -->
 	<script src="js/jquery.magnific-popup.min.js"></script>
@@ -480,6 +432,15 @@
 
 	<!-- Main -->
 	<script src="js/main.js"></script>
+
+        <script src="js/wm/jwt.js"></script>
+
+
+        <script>
+         $('sde').on('click',function(e){
+	removeJwtToken();
+        })
+        </script>
 
 	</body>
 </html>

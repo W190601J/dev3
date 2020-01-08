@@ -6,10 +6,13 @@ import com.order.userses.pojo.User;
 import com.order.userses.service.impl.UsersesServiceImpl;
 import com.order.utils.JwtTokenUtil;
 import com.order.utils.Note;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -22,6 +25,7 @@ public class UsersesController {
     @Autowired
     private Note note;
 
+    private String tokenHeader="Authorization";
 //    //验证用户
 //    @PostMapping("/check")
 //    public ResponseEntity<?> check(@RequestBody User user){
@@ -71,20 +75,22 @@ public class UsersesController {
     }
     //注册用户
     @RequestMapping(value = "/user",method = RequestMethod.POST)
-    public String addChef(@RequestBody User user){
+    public String addUsers(@RequestBody User user){
+
         //先进行用户搜索 确定用户名唯一性
-        int i =usersesService.queryUserByUname(user.getUname());
+        Integer i =usersesService.queryUserByUname(user.getUname());
         String s="用户名已存在";
         String p="注册成功";
         String q="注册失败";
-        if (i==1){
+        if (i!=null){
             return s;
-        }
-        int o=usersesService.addUser(user);
-        if (o!=1){
-            return q;
-        }
+        }else {
+            int o=usersesService.addUser(user);
+            if (o!=1){
+                return q;
+            }
             return p;
+        }
 }
     //获取验证码
     @RequestMapping(value = "/user/{phone}",method = RequestMethod.POST)
@@ -98,21 +104,36 @@ public class UsersesController {
     }
     //用户登录
     @RequestMapping(value = "/user/{uname}/{upwd}",method = RequestMethod.POST )
-    public String login(@PathVariable("uname")String uname,@PathVariable("upwd")String upwd){
-//        //先进行用户搜索 确定用户名唯一性
-//        int i =usersesService.queryUserByUname(uname);
-//        String s="用户名已存在";
+    public Object login(@PathVariable("uname")String uname,@PathVariable("upwd")String upwd){
+        System.out.println(11);
         String p="用户名密码不正确";
 //        if (i==1){
 //            return s;
 //        }
         //验证账号密码正确
-        int o =usersesService.login(uname,upwd);
-        if (o!=1){
-            return p;
+        User s =usersesService.login(uname,upwd);
+        if (s==null){
+            return null;
+        }else {
+            //生成token
+            String token=jwtTokenUtil.createJwt(s.getUid(),s.getUname());
+            System.out.println(token);
+            return token;
         }
-        //生成token
-        String token=jwtTokenUtil.createJwt(uname,upwd);
-        return token;
     }
+
+    //返回用户对象
+    @GetMapping("/check")
+    public User returnUser(HttpServletRequest request){
+        String token=request.getHeader(tokenHeader);
+        Claims c = jwtTokenUtil.parseJWT(token);
+
+        Integer uid = (Integer) c.get("uid");
+        String  uname=(String) c.get("uname");
+//        System.out.println(uid);
+//        System.out.println(uname);
+        User se=usersesService.queryUserById(uid);
+        return  se;
+    }
+
 }

@@ -469,9 +469,9 @@ h1, h2, h3, h4, h5, h6, figure {
 .gtco-cover a {
   color: #FBB448;
 }
-/*.gtco-cover a:hover {*/
-/*  color: white;*/
-/*}*/
+.gtco-cover a:hover {
+  color: white;
+}
 .gtco-cover .overlay {
   z-index: 1;
   position: absolute;
