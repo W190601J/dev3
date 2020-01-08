@@ -57,6 +57,7 @@ public class OrderingsController {
     //查询此用户下的所有的订单ok
     @GetMapping("/orderu2/{uid}")
     public List<Ordering> findAll2(@PathVariable("uid") Integer uid){
+        System.out.println(service.findone2(uid));
         return service.findone2(uid);
     }
 
