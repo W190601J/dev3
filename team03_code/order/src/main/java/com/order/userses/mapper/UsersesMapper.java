@@ -10,19 +10,19 @@ public interface UsersesMapper {
     public User check(User user);
 
     //添加用户
-    @Insert("INSERT INTO users(uname,upwd,uphone,rank)VALUES(#{uname},#{upwd},#{uphone},#{rank})")
+    @Insert("INSERT INTO users(uname,upwd,uphone)VALUES(#{uname},#{upwd},#{uphone})")
     public int addUser(User user);
     //删除用户
     @Delete("DELETE FROM users where uid=#{uid}")
     public int delUser(@Param("uid")Integer uid);
     //修改用户
-    @Update("UPDATE users SET uname=#{uname},upwd=#{upwd},uphone#{uphone},rank#{rank} WHERE uid=#{uid}  ")
+    @Update("UPDATE users SET uname=#{uname},upwd=#{upwd},uphone#{uphone} WHERE uid=#{uid}  ")
     public  int updateUser(User user);
     //查询全部用户
-    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users")
+    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate FROM users")
     public List<User> queryUser();
     //按照uid查询用户
-    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uid=#{uid}")
+    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate FROM users WHERE uid=#{uid}")
     public User queryUserById(@Param("uid")Integer uid);
     /**
      * start：起始位置
@@ -34,9 +34,9 @@ public interface UsersesMapper {
 
 
     //查询用户名是否存在
-    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname}")
+    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate FROM users WHERE uname=#{uname}")
     public Integer queryUserByUname(@Param("uname")String uname);
     //验证登录
-    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname} AND upwd=#{upwd}")
+    @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate FROM users WHERE uname=#{uname} AND upwd=#{upwd}")
     public User longin(@Param("uname")String uname,@Param("upwd")String upwd);
 }
