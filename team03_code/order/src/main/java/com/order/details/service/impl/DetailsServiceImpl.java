@@ -19,7 +19,9 @@ public class DetailsServiceImpl implements DetailsService {
 
     @Override
     public List<Detail> findAll(String oid) {
-        return dao.findAll(oid);
+        System.out.println(1);
+        List<Detail> l1=dao.findAll(oid);
+        return l1;
     }
 
     @Override

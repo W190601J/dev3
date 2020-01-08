@@ -9,7 +9,7 @@ public class OrderingIdGenerate {
 	
 	public static String generate() {
 		
-		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMddHHmmss");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
 		String x = sf.format(date);
 		String y = random();

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>支付页面</title>
+</head>
+
+<body>
+
+    <div id="x">
+
+    </div>
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <script>
+
+        $(function () {
+
+            pay();
+
+        })
+
+
+        function pay() {
+            var ordering = localStorage.getItem("ordering");
+            var r = JSON.parse(ordering);
+            var oid = r["oid"];
+            var amount = r["amount"];
+
+
+            $.ajax({
+                method: 'get',
+                url: "/page/pay",
+                data: {"oid":oid,"amount":amount},
+                success: function (data) {
+                    if(data!=null){
+                        alert(data.resultCode);
+                        // alert("支付成功"+data);
+                        $('#x').html(data)
+
+                        ///$('#x').load(data);
+                    }
+
+
+                },
+                contentType:'application/json;charset=utf-8',
+                dataType: 'text'
+
+
+            })
+
+        }
+
+
+    </script>
+
+
+
+</body>
+
+</html>
