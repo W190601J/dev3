@@ -75,20 +75,22 @@ public class UsersesController {
     }
     //注册用户
     @RequestMapping(value = "/user",method = RequestMethod.POST)
-    public String addChef(@RequestBody User user){
+    public String addUsers(@RequestBody User user){
+
         //先进行用户搜索 确定用户名唯一性
-        int i =usersesService.queryUserByUname(user.getUname());
+        Integer i =usersesService.queryUserByUname(user.getUname());
         String s="用户名已存在";
         String p="注册成功";
         String q="注册失败";
-        if (i==1){
+        if (i!=null){
             return s;
-        }
-        int o=usersesService.addUser(user);
-        if (o!=1){
-            return q;
-        }
+        }else {
+            int o=usersesService.addUser(user);
+            if (o!=1){
+                return q;
+            }
             return p;
+        }
 }
     //获取验证码
     @RequestMapping(value = "/user/{phone}",method = RequestMethod.POST)
@@ -103,9 +105,7 @@ public class UsersesController {
     //用户登录
     @RequestMapping(value = "/user/{uname}/{upwd}",method = RequestMethod.POST )
     public Object login(@PathVariable("uname")String uname,@PathVariable("upwd")String upwd){
-//        //先进行用户搜索 确定用户名唯一性
-//        int i =usersesService.queryUserByUname(uname);
-//        String s="用户名已存在";
+        System.out.println(11);
         String p="用户名密码不正确";
 //        if (i==1){
 //            return s;
@@ -117,22 +117,23 @@ public class UsersesController {
         }else {
             //生成token
             String token=jwtTokenUtil.createJwt(s.getUid(),s.getUname());
+            System.out.println(token);
             return token;
         }
     }
 
     //返回用户对象
     @GetMapping("/check")
-    public User login(HttpServletRequest request){
+    public User returnUser(HttpServletRequest request){
         String token=request.getHeader(tokenHeader);
         Claims c = jwtTokenUtil.parseJWT(token);
+
         Integer uid = (Integer) c.get("uid");
         String  uname=(String) c.get("uname");
-
+//        System.out.println(uid);
+//        System.out.println(uname);
         User se=usersesService.queryUserById(uid);
-
         return  se;
     }
-
 
 }

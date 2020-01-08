@@ -10,7 +10,7 @@ public interface UsersesMapper {
     public User check(User user);
 
     //添加用户
-    @Insert("INSERT INTO users(uname,upwd,uphone,rank)VALUES(uname=#{uname},upwd=#{upwd},uphone#{uphone},rank#{rank})")
+    @Insert("INSERT INTO users(uname,upwd,uphone,rank)VALUES(#{uname},#{upwd},#{uphone},#{rank})")
     public int addUser(User user);
     //删除用户
     @Delete("DELETE FROM users where uid=#{uid}")
@@ -35,7 +35,7 @@ public interface UsersesMapper {
 
     //查询用户名是否存在
     @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname}")
-    public int queryUserByUname(@Param("uname")String uname);
+    public Integer queryUserByUname(@Param("uname")String uname);
     //验证登录
     @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname} AND upwd=#{upwd}")
     public User longin(@Param("uname")String uname,@Param("upwd")String upwd);

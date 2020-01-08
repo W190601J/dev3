@@ -29,7 +29,7 @@ public interface UsersesService {
 
     //查询用户名是否存在
     @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname}")
-    public int queryUserByUname(String uname);
+    public Integer queryUserByUname(String uname);
     //验证登录
     @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname} AND upwd=#{upwd}")
     public User login(String uname,String upwd);

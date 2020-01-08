@@ -1,5 +1,4 @@
 /**
- * @author Quanlijian
  * jwt有关
  */
 

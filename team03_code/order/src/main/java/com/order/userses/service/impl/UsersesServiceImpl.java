@@ -51,7 +51,7 @@ public class UsersesServiceImpl implements UsersesService {
     }
 
     @Override
-    public int queryUserByUname(String uname) {
+    public Integer queryUserByUname(String uname) {
         return usersesMapper.queryUserByUname(uname);
     }
 
