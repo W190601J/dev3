@@ -122,7 +122,7 @@
 												<!--后台数据书写区域-->
 												<div id="w1">
 													<div id="">
-														<i class="layui-icon layui-icon-username" style="font-size: 50px">杨磊</i>
+														<i class="layui-icon layui-icon-username" style="font-size: 50px" id="uname2"></i>
 												   </div>
 												   <div id="">
 														<h3>推荐食品</h3>
@@ -151,12 +151,12 @@
 												<div >
 													<div id="w3" style="display:none">
 														<div>
-																<i class="layui-icon layui-icon-username" style="font-size: 50px">杨磊</i>
+																<i class="layui-icon layui-icon-username" style="font-size: 50px" id="uname3"></i>
 																
 														</div>
 														<div class="row form-group">
 																<div class="col-md-12">
-																		<i class="layui-icon layui-icon-cellphone-fine" style="font-size: 30px">18274011039</i>
+																		<i class="layui-icon layui-icon-cellphone-fine" style="font-size: 30px" id="uphone"></i>
 																</div>
 															</div>
 															<div class="row form-group">
@@ -171,7 +171,7 @@
 														<div id="w4" style="display:none">
 																<div class="tab-content">
 																		<div class="tab-content-inner active" data-content="signup">
-																				<i class="layui-icon layui-icon-username" style="font-size: 50px">杨磊</i>
+																				<i class="layui-icon layui-icon-username" style="font-size: 50px" id="uname"></i>
 																			<a action="#"></a>
 																		</div>
 																				
@@ -279,12 +279,34 @@
             //注意：导航 依赖 element 模块，否则无法进行功能性操作
             layui.use('element', function(){
               var element = layui.element;
-              loadData(22);
               //…
             });
+			$(function () {
+				qutoken();
+			});
 			function u() {
 				removeJwtToken();
 				window.location.href="denlu.html";
+			};
+			function qutoken() {
+				$.ajax({
+					method:'get',
+					url:'http://localhost:8080/users/check/sss',
+					headers: createAuthorizationTokenHeader(),
+					success:function (data) {
+						console.log("1111",data);
+						if(data!=null){
+
+							loadData(data.uid);
+							$("#uname").html(data.uname);
+							$("#uname2").html(data.uname);
+							$("#uname3").html(data.uname);
+							$("#uphone").html(data.uphone);
+						}
+					},
+					dataType:'json'
+
+				})
 			}
 
 
@@ -343,6 +365,7 @@ $.ajax({
 		console.log(data);
 		let tr = '';
 		$.each(data, (i, v) => {
+
 			// //判断状态:已启用、已停用
 			// let info = '';
 			// let infoCls = '';

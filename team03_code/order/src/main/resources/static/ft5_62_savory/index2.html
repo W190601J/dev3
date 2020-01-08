@@ -506,10 +506,27 @@
 
 
         <script>
-
+			$(function () {
+				qutoken();
+			})
 			function u() {
 				removeJwtToken();
 				window.location.href="denlu.html";
+			};
+			function qutoken() {
+				$.ajax({
+					method:'get',
+					url:'http://localhost:8080/users/check/sss',
+					headers: createAuthorizationTokenHeader(),
+					success:function (data) {
+						if(data!=null){
+							var i=data.getUid();
+							alert(i);
+						}
+					},
+					dataType:'json'
+
+				})
 			}
         </script>
 

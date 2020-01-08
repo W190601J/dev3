@@ -122,7 +122,7 @@ public class UsersesController {
     }
 
     //返回用户对象
-    @GetMapping("/check")
+    @GetMapping("/check/sss")
     public User returnUser(HttpServletRequest request){
         String token=request.getHeader(tokenHeader);
         Claims c = jwtTokenUtil.parseJWT(token);

@@ -7,10 +7,13 @@
           <link href="css/font-awesome.min.css" rel="stylesheet">
 <body>
 <title>添加地址</title>
+<input type="hidden" id="hide">
  <link rel="stylesheet" type="text/css" href="css/style2.css">
     <!-- 从官方下载的文件放在项目的 jquery-mobile 目录中 -->  
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<link rel="stylesheet" href="../css/font.css">
+<link rel="stylesheet" href="../css/xadmin.css">
 <style type="text/css">
     body,
     html {
@@ -131,8 +134,13 @@ border-radius:3px;
 <!-- <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script> -->
 <SCRIPT src="js/jquery-3.3.1.min.js" type="text/javascript"></SCRIPT>
 <script language="javascript" src="js/jquery.gcjs.js"></script>
+<script src="./lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/xadmin.js"></script>
+<script src="js/wm/jwt.js"></script>
 <script type="text/javascript">
+
     (function(){
+
         // 百度地图API功能
         function G(id) {
             return document.getElementById(id);
@@ -203,11 +211,30 @@ border-radius:3px;
         });
         map.addEventListener("click", showInfo);//搜索事件
     })()
-
-</script>
-
+    </script>
 <script>
+    $(function () {
+        console.log("111");
+        qutoken();
+    });
+    function qutoken() {
+        console.log("222")
+        $.ajax({
+            method:'get',
+            url:'http://localhost:8080/users/check/sss',
+            headers: createAuthorizationTokenHeader(),
+            success:function (data) {
+                console.log("1111",data);
+                if(data!=null){
 
+
+                    $("#hide").val(data.uid);
+                }
+            },
+            dataType:'json'
+
+        })
+    }
     function copyText(){
 
         var data = {};
@@ -218,7 +245,7 @@ border-radius:3px;
         data["bphone"] = bphone;
         var address = $("#address").val();
         data["address"] = address;
-        var uid = 21;
+        var uid = $("#hide").val();
         data["uid"] = uid;
         
         
@@ -230,21 +257,21 @@ border-radius:3px;
         var datas = JSON.stringify(data);
         
 
-        console.log(datas);
-        console.log(typeof(datas));
+
 
         $.ajax({
             method:'post',
             url:'/ordering/order/create',
             data:datas,
             success:function(data){
-                alert(data);
+
                 console.log(data);
                 if(data!=null){
                     alert("下单成功，即将进行支付页面！");
                     var ordering = JSON.stringify(data);
                     localStorage.setItem("ordering",ordering);
-                    location.href = "pay.html";
+                    //location.href = "pay.html";
+                    tt();
                 }
 
             },
@@ -252,6 +279,9 @@ border-radius:3px;
             dataType:'json'
 
         })
+    }
+    function tt() {
+        window.open ('pay.html','newwindow', 'height=900px, width=1200px');
     }
 
 

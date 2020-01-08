@@ -37,9 +37,9 @@
                 data: {"oid":oid,"amount":amount},
                 success: function (data) {
                     if(data!=null){
-                        alert(data.resultCode);
+                        console.log(data);
                         // alert("支付成功"+data);
-                        $('#x').html(data)
+                        $('#x').html(data);
 
                         ///$('#x').load(data);
                     }
