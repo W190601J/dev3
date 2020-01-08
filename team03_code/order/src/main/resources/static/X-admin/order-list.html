@@ -64,7 +64,7 @@
                                 </tbody>
                             </table>
                             <!--用于分页-->
-                            <div class="text-c" id="page"></div>
+                            <div class="text-c" id="page" style="margin-left: 600px"></div>
                         </div>
 
                     </div>
@@ -174,7 +174,7 @@
                     <td>${v.orderstatus== 0 ? '新订单' : v.gender == 1 ? '完结订单': '取消订单'}</td>
                     <td>${v.createtime}</td>
                     <td class="td-manage">
-                                            <a title="查看" id="chakan" onclick="edit(${v.oid})" href="javascript:;">
+                                            <a title="查看" id="chakan" onclick="xadmin.open('查看','./order-query.html?oid='+${v.oid},800,600)" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>
                                             <a title="取消" id="del" onclick="quxiao(${v.oid},${v.uid})" href="javascript:;">
                                                 <i class="layui-icon">&#xe640;</i></a>
@@ -201,7 +201,7 @@
         function edit(oid) {
                 layer.open({
                     type: 2,
-                    content: 'order-query.html?oid=' + oid,
+                    content: 'order-query.html?oid='+ oid,
                     area: ['1100px', '600px']
                 });
             }
