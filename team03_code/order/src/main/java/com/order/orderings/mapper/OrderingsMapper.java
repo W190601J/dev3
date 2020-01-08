@@ -47,4 +47,7 @@ public interface OrderingsMapper {
     //带条件总记录数
     public int count(@Param("keyword") String keyword);
 
+    //查询当月营业额
+    @Select("SELECT SUM(amount) FROM ordering WHERE MONTH(createtime)=#{month} AND pay=0")
+    public Integer SumTotal(@Param("month") Integer month);
 }

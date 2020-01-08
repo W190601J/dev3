@@ -200,4 +200,9 @@ public class OrderingsServiceImpl implements OrderingsService {
     public int count(String keyword) {
         return dao.count(keyword);
     }
+
+    @Override
+    public Integer SumTotal(Integer month) {
+        return dao.SumTotal(month);
+    }
 }

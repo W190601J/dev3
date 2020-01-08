@@ -27,8 +27,4 @@ public class DetailsServiceImpl implements DetailsService {
         return dao.Sum(fid);
     }
 
-    @Override
-    public int SumTotal(Integer month) {
-        return dao.SumTotal(month);
-    }
 }

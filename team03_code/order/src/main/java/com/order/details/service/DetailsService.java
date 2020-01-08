@@ -14,6 +14,4 @@ public interface DetailsService {
     //查询当月菜品的销售量
     public int Sum(Integer fid);
 
-    //查询当月菜品的销售量
-    public int SumTotal(Integer month);
 }

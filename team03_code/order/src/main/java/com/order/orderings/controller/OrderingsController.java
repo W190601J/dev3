@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -72,6 +73,20 @@ public class OrderingsController {
     @GetMapping({"/order/count/{keyword}","/order/count/","/order/count"})
     public int count(@PathVariable(required = false,value = "keyword") String keyword){
         return service.count(keyword);
+    }
+     //
+    @GetMapping("/sumtotal")
+    public List<String> SumTotal(){
+        List<String> s= new ArrayList<>();
+        for (int month=1;month<13;month++){
+            String a=(String.valueOf(service.SumTotal(month)));
+            if (a=="null"){
+                a="0";
+                System.out.println(a);
+            }
+            s.add(a);
+        }
+        return s;
     }
 }
 

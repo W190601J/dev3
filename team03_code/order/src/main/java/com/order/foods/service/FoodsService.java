@@ -42,4 +42,7 @@ public interface FoodsService {
 
     public List<Food> findFood(Integer page, Integer pageSize,Integer cnumber);
     public int querytt(Integer cnumber);
+
+    //查询所有菜品
+    public List<Food> queryFid();
 }

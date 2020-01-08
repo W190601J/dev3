@@ -56,4 +56,9 @@ public interface FoodsMapper {
     //获得总记录数，需要区分菜式
     @Select("SELECT count(1) FROM food where cnumber=#{cnumber}")
     public int querytt(@Param("cnumber")Integer cnumber);
+
+
+    //根据菜品的状态查询所有已上架菜品（买家端）,方法已测
+    @Select("select fid,fname,cnumber,price,fphoto,finfo,fsell,cstock,fstatus from food ")
+    public List<Food> queryFid();
 }

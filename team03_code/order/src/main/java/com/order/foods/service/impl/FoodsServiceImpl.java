@@ -84,4 +84,9 @@ public class FoodsServiceImpl implements FoodsService {
     public int querytt(Integer cnumber) {
         return foodsMapper.querytt(cnumber);
     }
+
+    @Override
+    public List<Food> queryFid() {
+        return foodsMapper.queryFid();
+    }
 }
