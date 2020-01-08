@@ -38,4 +38,7 @@ public interface OrderingsService {
 
     //条件查询总记录数
     public int count(String keyword);
+
+    //查询当月营业额
+    public Integer SumTotal(Integer month);
 }

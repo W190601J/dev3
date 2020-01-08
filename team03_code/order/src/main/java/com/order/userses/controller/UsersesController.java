@@ -105,7 +105,6 @@ public class UsersesController {
     //用户登录
     @RequestMapping(value = "/user/{uname}/{upwd}",method = RequestMethod.POST )
     public Object login(@PathVariable("uname")String uname,@PathVariable("upwd")String upwd){
-        System.out.println(11);
         String p="用户名密码不正确";
 //        if (i==1){
 //            return s;
