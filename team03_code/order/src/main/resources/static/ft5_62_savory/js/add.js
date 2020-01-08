@@ -126,7 +126,7 @@ $(function () {
 
                         dx += `
 					<li>
-						<div class="menu-img"><img src="${v.photo}" width="55" height="55"></div>
+						<div class="menu-img"><img src="http://localhost:8080/foods/img/${v.id}" width="55" height="55"></div>
                         <div class="menu-txt">
 							<h4 data-icon="${v.id}">${v.name}</h4>
 							<p class="list1">${v.info}</p>
