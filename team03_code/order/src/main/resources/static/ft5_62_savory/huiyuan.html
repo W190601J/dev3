@@ -74,19 +74,20 @@
 				<!-- 导航条 开始 -->
 				<div class="row">
 					<div class="col-sm-4 col-xs-12">
-						<div id="gtco-logo"><a href="index.html">首页 <em>.</em></a></div>
+						<div id="gtco-logo"><a href="index2.html">首页 <em>.</em></a></div>
 					</div>
 					<div class="col-xs-8 text-right menu-1">
 						<ul>
-							<li><a href="menu.html">菜单</a></li>
+							<li><a href="menu2.html">菜单</a></li>
 							<li class="has-dropdown">
-								<a href="services.html">服务</a>
+								<a href="services2.html">服务</a>
 								<ul class="dropdown">
 									<li><a href="waimai.html">外卖</a></li>
 								</ul>
 							</li>
-							<li><a href="contact.html">我们</a></li>
+							<li><a href="contact2.html">我们</a></li>
 							<li class="btn-cta"><a href="huiyuan.html"><span>用户中心</span></a></li>
+							<li class="btn-cta"><a id="sde" href=""><i class="layui-icon layui-icon-about" style="font-size: 20px; color: rgb(255, 30, 30)" >退出</i></a></li>
 						</ul>
 					</div>
 				</div>
@@ -108,10 +109,9 @@
                                 <div class="col-md-2 mt-text animate-box" data-animate-effect="fadeInUp">
                                         <ul class="layui-nav layui-nav-tree" lay-filter="test">
                                                 <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
-                                                  <li class="layui-nav-item"><a id="y1">用户首页</a></li>
-                                                  <li class="layui-nav-item"><a id="y2">订单查询</a></li>
-                                                  <li class="layui-nav-item"><a id="y3">地址管理</a></li>
-                                                  <li class="layui-nav-item"><a id="y4">个人信息</a></li>
+                                                  <li id="y1" class="layui-nav-item"><a>用户首页</a></li>
+                                                  <li id="y2" class="layui-nav-item"><a>订单查询</a></li>
+                                                  <li id="y3" class="layui-nav-item"><a >个人信息</a></li>
                                                 </ul>
                                 </div>
                                 <div class="col-md-10 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
@@ -119,13 +119,100 @@
                                         <div class="tab">
     
                                             <div class="tab-content">
-                                                <!--后台数据书写区域-->
-                                               <div id="y5">
-                                                    <i class="layui-icon layui-icon-username" style="font-size: 50px">杨佳斌</i>
-                                               </div>
-                                               <div id="y6">
-                                                    <h3>推荐食品</h3>
-                                                </div>
+												<!--后台数据书写区域-->
+												<div id="w1">
+													<div id="">
+														<i class="layui-icon layui-icon-username" style="font-size: 50px">杨佳斌</i>
+												   </div>
+												   <div id="">
+														<h3>推荐食品</h3>
+													</div>
+												</div>
+
+												<div id="w2" style="display:none">
+													<table class="table table-hover">
+														<thead>
+															<tr>
+																<th>订单id</th>
+												                <th>用户名</th>
+												                <th>手机号</th>
+												                <th>地址</th>
+												                <th>金额</th>
+												                <th>支付状态</th>
+												                <th>创建时间</th>
+															</tr>
+														</thead>
+														<tbody>
+
+														</tbody>
+													  </table>
+
+												</div>
+												<div >
+													<div id="w3" style="display:none">
+														<div>
+																<i class="layui-icon layui-icon-username" style="font-size: 50px">杨佳斌</i>
+																
+														</div>
+														<div class="row form-group">
+																<div class="col-md-12">
+																		<i class="layui-icon layui-icon-cellphone-fine" style="font-size: 30px">17377631633</i>
+																</div>
+															</div>
+															<div class="row form-group">
+																	<div class="col-md-12">
+																			<button id="s1" type="button" class="layui-btn layui-btn-normal">编辑</button>
+																	</div>
+																</div>
+															
+
+													</div>
+														<!--用于，用户编辑-->
+														<div id="w4" style="display:none">
+																<div class="tab-content">
+																		<div class="tab-content-inner active" data-content="signup">
+																				<i class="layui-icon layui-icon-username" style="font-size: 50px">杨佳斌</i>
+																			<form action="#">
+																		</div>
+																				
+																				<div class="row form-group">
+																					<div class="col-md-12">
+																						<label for="date-start">密码</label>
+																						<input type="password" id="" class="form-control">
+																					</div>
+																				</div>
+																				<div class="row form-group">
+																						<div class="col-md-12">
+																							<label for="date-start">新密码</label>
+																							<input type="password" id="" class="form-control">
+																						</div>
+																				</div>
+																			    <div class="row form-group">
+																							<div class="col-md-12">
+																								<label for="date-start">确认密码</label>
+																								<input type="password" id="" class="form-control">
+																							</div>
+																				</div>
+																				<div class="row form-group">
+																						<div class="col-md-12">
+																							<label for="date-start">手机号码</label>
+																							<input type="text" id="" class="form-control" value="">
+																						</div>
+																			</div>
+							
+																				<div class="row form-group">
+																					<div class="col-md-6">
+																						<input type="button" class="btn btn-primary btn-block"
+																							value="确认">
+																					</div>
+																					
+																				</div>
+																			</form>
+																		</div>
+														</div>
+
+												</div>
+                                              
                                                
     
     
@@ -157,7 +244,7 @@
 	<!-- 回到最上层 - --- --结束 -->
 
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-3.3.1.min.js"></script>
 	<!-- jQuery Easing -->
 	<script src="js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
@@ -185,38 +272,125 @@
 
 	<!-- Main -->
 	<script src="js/main.js"></script>
+	<script src="js/wm/jwt.js"></script>
 
 
     <script>
             //注意：导航 依赖 element 模块，否则无法进行功能性操作
             layui.use('element', function(){
               var element = layui.element;
-              
               //…
             });
+
+$('sde').on('click',function(e){
+	removeJwtToken();
+})
+
+
+$('#y1').on('click',function(e){
+       wws1();
+})
+
+$('#y2').on('click',function(e){
+	wws2();
+})
+
+$('#y3').on('click',function(e){
+	wws3();
+})
+
+$('#s1').on('click',function(e){
+	wws4();
+})
+
+function wws1(){
+ $('#w1').show();
+ $('#w2').hide();
+ $('#w3').hide();
+ $('#w4').hide();
+
+}
+function wws2(){
+ $('#w2').show();
+ $('#w1').hide();
+ $('#w3').hide();
+ $('#w4').hide();
+
+}
+function wws3(){
+ $('#w3').show();
+ $('#w2').hide();
+ $('#w1').hide();
+ $('#w4').hide();
+
+}
+
+function wws4(){
+ $('#w4').show();
+ $('#w1').hide();
+ $('#w2').hide();
+ $('#w3').hide();
+
+}
+
+
+
+
+ function loadData(page, pageSize, keyword) {
+
+let url = `/ordering/order/${page}/${pageSize}/`;
+if (keyword != null) {
+	url = `/ordering/order/${page}/${pageSize}/${keyword}`;
+}
+$.ajax({
+	method: 'get',
+	url: url,
+	success: function (data) {
+		let tr = '';
+		$.each(data, (i, v) => {
+			// //判断状态:已启用、已停用
+			// let info = '';
+			// let infoCls = '';
+			// if (v.doexist == 0) {
+			//     info = '已停用';
+			//     infoCls = 'btn btn-warning';
+			// } else if (v.doexist == 1) {
+			//     info = '已启用';
+			//     infoCls = 'btn btn-success';
+			// }
+
+			tr += `
+	<tr>
+		<td>${v.oid}</td>
+		<td>${v.bname}</td>
+		<td>${v.bphone}</td>
+		<td>${v.address}</td>
+		<td>${v.amount}</td>
+		<td>${v.pay== 0 ? '支付' : '未支付'}</td>
+		<td>${v.createtime}</td>
+
+	</tr>
+
+	`
+		})
+
+		$('tbody').html(tr);
+	},
+	dataType: 'json'
+
+})
+}
             </script>
 
 
 <script>
- function loget(){
-    $.ajax({
-        async: false,
-        method: 'get',
-        url: `/api/admin/login/${aname}/${pwd}`,
-        success: function (data) {
-            if (data != null) {
-                location.href = 'main.html';
-            }
 
-        },
-        error: function (xhr, txtStatus, errorThrown) {
-            layer.msg('用户名或密码错误', {icon: 2});
-        },
-        dataType: 'json'
 
-    })
 
- }
+
+
+
+
 
 
 </script>

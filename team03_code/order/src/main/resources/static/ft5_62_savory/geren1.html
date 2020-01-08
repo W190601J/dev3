@@ -118,73 +118,11 @@
 									<li class="layui-nav-item"><a href="">我的信息</a></li>
 								</ul>
 
-								<!-- 信息展示模板 -->
-								<!-- <div class="col-md-10 ml-4">
-								</div> -->
-
-								<!-- 个人信息展示模板 -->
-								<!-- <div class="col-md-10 ml-3" style="background-color: #999999; color:aliceblue;" id="s1">
-					
-									<div class="row ml-2">
-					
-										<div class="col-md-11 mt-3 border-bottom">
-											<div class="row mb-2" style="font-size: 18px;">个人信息</div>
-										</div>
-					
-									</div>
-					
-									<div class="row ml-2">
-					
-										<div class="col-md-11 mt-3 border-bottom">
-											<div class="row">
-					
-												<div class="col-md-2">姓名/性别</div>
-												<div class="col-md-8">xxxxx</div>
-												<div class="col-md-2 mb-3"><a href="#">修改</a></div>
-					
-											</div>
-										</div>
-					
-									</div>
-					
-									<div class="row ml-2">
-					
-										<div class="col-md-11 mt-3 border-bottom">
-					
-											<div class="row">
-					
-												<div class="col-md-2">手机号码</div>
-												<div class="col-md-8">138855555555</div>
-					
-											</div>
-					
-											<div class="row mt-3">
-					
-												<div class="col-md-2">密码</div>
-												<div class="col-md-8">**********</div>
-												<div class="col-md-2 mb-3"><a href="#">修改</a></div>
-					
-											</div>
-					
-										</div>
-					
-									</div>
-					
-								</div> -->
-
 
 								<!-- 订单详情模板 -->
 								<div class="col-md-10 ml-3" id="s2">
 
-									<ul class="layui-nav" lay-filter="">
-										<li class="layui-nav-item"><a href="">全部订单</a></li>
-										<li class="layui-nav-item"><a href="">新订单</a></li>
-										<li class="layui-nav-item"><a href="">已支付订单</a></li>
-										<li class="layui-nav-item"><a href="">未支付订单</a></li>
-										<li class="layui-nav-item"><a href="">已完成订单</a></li>
-										<li class="layui-nav-item"><a href="">未完成订单</a></li>
-									</ul>
-
+								
 									<table class="table" style="color: aliceblue;">
 										<thead>
 											<tr>
@@ -193,27 +131,12 @@
 												<th>手机号</th>
 												<th>地址</th>
 												<th>金额</th>
-												<th>订单状态</th>
-												<th>支付方式</th>
 												<th>支付状态</th>
 												<th>创建时间</th>
-												<th colspan="2">操作</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>1</td>
-												<td>1</td>
-												<td>1</td>
-												<td>1</td>
-												<td>1</td>
-												<td>1</td>
-												<td>1</td>
-												<td>1</td>
-												<td>1</td>
-												<td>1</td>
-											</tr>
+										
 										</tbody>
 									</table>
 								</div>
@@ -224,7 +147,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
 		</header>
+
 
 
 
@@ -276,9 +201,53 @@
 	<script>//注意：导航 依赖 element 模块，否则无法进行功能性操作
 		layui.use('element', function () {
 			var element = layui.element;
-
+			loadData(1,10);
 			//…
 		});
+		function loadData(page, pageSize, keyword) {
+
+            let url = `/ordering/order/${page}/${pageSize}/`;
+            if (keyword != null) {
+                url = `/ordering/order/${page}/${pageSize}/${keyword}`;
+            }
+            $.ajax({
+                method: 'get',
+                url: url,
+                success: function (data) {
+                    let tr = '';
+                    $.each(data, (i, v) => {
+                        // //判断状态:已启用、已停用
+                        // let info = '';
+                        // let infoCls = '';
+                        // if (v.doexist == 0) {
+                        //     info = '已停用';
+                        //     infoCls = 'btn btn-warning';
+                        // } else if (v.doexist == 1) {
+                        //     info = '已启用';
+                        //     infoCls = 'btn btn-success';
+                        // }
+
+                        tr += `
+                <tr>
+                    <td>${v.oid}</td>
+                    <td>${v.bname}</td>
+                    <td>${v.bphone}</td>
+                    <td>${v.address}</td>
+                    <td>${v.amount}</td>
+                    <td>${v.pay== 0 ? '支付' : '未支付'}</td>
+                    <td>${v.createtime}</td>
+
+                </tr>
+
+                `
+                    })
+
+                    $('tbody').html(tr);
+                },
+                dataType: 'json'
+
+            })
+        }
 	</script>
 
 </body>
