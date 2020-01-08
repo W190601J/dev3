@@ -32,6 +32,6 @@ public interface UsersesService {
     public int queryUserByUname(String uname);
     //验证登录
     @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname} AND upwd=#{upwd}")
-    public int login(String uname,String upwd);
+    public User login(String uname,String upwd);
 
 }

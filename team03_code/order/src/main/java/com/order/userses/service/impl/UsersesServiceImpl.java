@@ -56,7 +56,7 @@ public class UsersesServiceImpl implements UsersesService {
     }
 
     @Override
-    public int login(String uname, String upwd) {
+    public User login(String uname, String upwd) {
         return usersesMapper.longin(uname,upwd);
     }
 }

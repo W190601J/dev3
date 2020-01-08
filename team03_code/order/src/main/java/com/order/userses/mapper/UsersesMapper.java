@@ -38,5 +38,5 @@ public interface UsersesMapper {
     public int queryUserByUname(@Param("uname")String uname);
     //验证登录
     @Select("SELECT uid,uname,upwd,uphone,ucreate,userupdate,rank FROM users WHERE uname=#{uname} AND upwd=#{upwd}")
-    public int longin(@Param("uname")String uname,@Param("upwd")String upwd);
+    public User longin(@Param("uname")String uname,@Param("upwd")String upwd);
 }
