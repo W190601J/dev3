@@ -50,9 +50,14 @@ public class OrderingsController {
     }
 
     //查询此用户下的所有的订单ok
-    @GetMapping("/order/{uid}/")
+    @GetMapping("/orderu/{uid}/")
     public List<Ordering> findAll(@PathVariable("uid") Integer uid){
         return service.findAll(uid);
+    }
+    //查询此用户下的所有的订单ok
+    @GetMapping("/orderu2/{uid}")
+    public List<Ordering> findAll2(@PathVariable("uid") Integer uid){
+        return service.findone2(uid);
     }
 
     //查询所有订单ok

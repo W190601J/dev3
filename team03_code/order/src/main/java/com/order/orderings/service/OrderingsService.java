@@ -41,4 +41,6 @@ public interface OrderingsService {
 
     //查询当月营业额
     public Integer SumTotal(Integer month);
+
+    public List<Ordering> findone2(Integer uid);
 }

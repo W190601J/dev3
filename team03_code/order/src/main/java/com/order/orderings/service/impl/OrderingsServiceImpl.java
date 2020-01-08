@@ -205,4 +205,9 @@ public class OrderingsServiceImpl implements OrderingsService {
     public Integer SumTotal(Integer month) {
         return dao.SumTotal(month);
     }
+
+    @Override
+    public List<Ordering> findone2(Integer uid) {
+        return dao.findone2(uid);
+    }
 }

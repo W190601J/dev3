@@ -83,7 +83,7 @@
 								</li>
 								<li><a href="contact2.html">我们</a></li>
 								<li class="btn-cta"><a href="huiyuan.html"><span>用户中心</span></a></li>
-							<li class="btn-cta"><a id="sde" href=""><i class="layui-icon layui-icon-about" style="font-size: 20px; color: rgb(255, 30, 30)" >退出</i></a></li>
+							<li class="btn-cta"><i class="layui-icon layui-icon-about" style="font-size: 20px; color: rgb(255, 30, 30)" onclick="u()">退出</i></li>
 							</ul>
 						</div>
 					</div>
@@ -506,9 +506,11 @@
 
 
         <script>
-         $('sde').on('click',function(e){
-	removeJwtToken();
-        })
+
+			function u() {
+				removeJwtToken();
+				window.location.href="denlu.html";
+			}
         </script>
 
 	</body>

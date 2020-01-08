@@ -32,9 +32,13 @@
         </form>
     </div>
 
-    <script src="X-admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script>
+        layui.use(['laypage', 'layer'],
+            function () {
+                let layer = layui.layer;//消息框
+            });
         function login() {
             let uname=$("#uname").val();
             let password=$("#password").val();
@@ -44,7 +48,16 @@
                 url: url,
                 success: function (data) {
                     if(data!=null){
+                        layer.msg('登录成功!', {
+                            icon: 1,
+                            time: 2000
+                        });
                         window.location.href="index.html";
+                    }else{
+                        layer.msg('登录失败!', {
+                            icon: 5,
+                            time: 2000
+                        });
                     }
                 },
                 dataType: 'json'

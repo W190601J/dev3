@@ -50,4 +50,8 @@ public interface OrderingsMapper {
     //查询当月营业额
     @Select("SELECT SUM(amount) FROM ordering WHERE MONTH(createtime)=#{month} AND pay=0")
     public Integer SumTotal(@Param("month") Integer month);
+
+    //查询个人点单
+    @Select("select oid,uid,bname,bphone,address,amount,pay,orderstatus,createtime,updatetime from ordering where uid=#{uid}")
+    public List<Ordering> findone2(Integer uid);
 }

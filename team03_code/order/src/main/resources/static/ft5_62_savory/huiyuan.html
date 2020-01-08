@@ -87,7 +87,7 @@
 							</li>
 							<li><a href="contact2.html">我们</a></li>
 							<li class="btn-cta"><a href="huiyuan.html"><span>用户中心</span></a></li>
-							<li class="btn-cta"><a id="sde" href=""><i class="layui-icon layui-icon-about" style="font-size: 20px; color: rgb(255, 30, 30)" >退出</i></a></li>
+							<li class="btn-cta"><i class="layui-icon layui-icon-about" style="font-size: 20px; color: rgb(255, 30, 30)" onclick="u()">退出</i></a></li>
 						</ul>
 					</div>
 				</div>
@@ -172,7 +172,7 @@
 																<div class="tab-content">
 																		<div class="tab-content-inner active" data-content="signup">
 																				<i class="layui-icon layui-icon-username" style="font-size: 50px">杨佳斌</i>
-																			<form action="#">
+																			<a action="#"></a>
 																		</div>
 																				
 																				<div class="row form-group">
@@ -279,12 +279,9 @@
             //注意：导航 依赖 element 模块，否则无法进行功能性操作
             layui.use('element', function(){
               var element = layui.element;
+              fuu()
               //…
             });
-
-$('sde').on('click',function(e){
-	removeJwtToken();
-})
 
 
 $('#y1').on('click',function(e){
@@ -332,16 +329,14 @@ function wws4(){
  $('#w3').hide();
 
 }
+			function u() {
+				removeJwtToken();
+				window.location.href="denlu.html";
+			}
 
+			function loadData(uid) {
 
-
-
- function loadData(page, pageSize, keyword) {
-
-let url = `/ordering/order/${page}/${pageSize}/`;
-if (keyword != null) {
-	url = `/ordering/order/${page}/${pageSize}/${keyword}`;
-}
+let url = `/ordering/orderu2/${uid}`;
 $.ajax({
 	method: 'get',
 	url: url,
