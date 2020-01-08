@@ -157,6 +157,14 @@ public class ChefController {
         //用于显示一张图片
         FileCopyUtils.copy(input,out);
     }
+    //登录
+    @GetMapping("/login/{uname}/{password}")
+    public int login(@PathVariable("uname") String uname,@PathVariable("password") String password){
+        if(uname=="admin"&&password=="123"){
+            return 1;
+        }
+        return 0;
+    }
     //查询总记录数
     @GetMapping("querytt")
     public int querytt(){

@@ -19,7 +19,7 @@ public interface DetailsMapper {
 
     //查询当月菜品的销售量
     @Select("SELECT SUM(b.quantity)FROM ordering a LEFT JOIN details b ON a.oid=b.oid WHERE DATE_FORMAT(a.createtime, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) AND b.fid=#{fid} AND a.pay=0 ")
-    public int Sum(@Param("fid")Integer fid);
+    public Integer Sum(@Param("fid")Integer fid);
 
 //    //查询当月菜品的销售量
 //    @Select("SELECT SUM(b.dprice)FROM ordering a LEFT JOIN details b ON a.oid=b.oid WHERE DATE_FORMAT(a.createtime, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )  AND a.pay=0 ")

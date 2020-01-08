@@ -30,20 +30,29 @@ public class DetailsController {
 
     @GetMapping("/sum")
     public List<Integer> Sum(){
-         List<Food> lf=foodsService.queryFid();
+        System.out.println(2222);
+        List<Food> lf=foodsService.queryFid();
          List<Integer> li=new ArrayList<>();
         for (Food food:lf
              ) {
-            li.add(service.Sum(food.getFid()));
+            if(service.Sum(food.getFid())==null){
+
+                li.add(0);
+            }else{
+                li.add(service.Sum(food.getFid()));
+            }
+
         }
         return li;
     }
     @GetMapping("/sums")
     public List<String> Sums(){
+        System.out.println(1111);
         List<Food> lf=foodsService.queryFid();
         List<String> ls=new ArrayList<>();
         for (Food food:lf
         ) {
+            System.out.println(food.getFname());
             ls.add(food.getFname());
         }
         return ls;

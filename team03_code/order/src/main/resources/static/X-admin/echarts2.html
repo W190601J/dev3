@@ -20,15 +20,16 @@
     $(function () {
         loadData();
         loadData2();
-        time = setInterval("f2()", 1000);
+        time = setInterval("f2()", 5000);
     })
     var dataAxis = [];
-    var data=[];
+    var data2=[];
     function loadData() {
          $.ajax({
              method:'get',
-             url:'/sums',
+             url:'http://localhost:8080/sums',
              success:function (data) {
+                 console.log(data);
                  $.each(data, (i, v) => {
                      dataAxis.push(v);
                  }
@@ -39,18 +40,17 @@
     function loadData2() {
         $.ajax({
             method:'get',
-            url:'/sum',
+            url:'http://localhost:8080/sum',
             success:function (data) {
+                console.log(data);
                 $.each(data, (i, v) => {
-                    data.push(v);
+                    data2.push(v);
                     }
                 )},
             dataType:'json'
         })
     }
 
-    alert(dataAxis);
-    alert(data)
 
 
 
@@ -62,12 +62,10 @@
       option = null;
       //var dataAxis = ['剁椒鱼头', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
       //var data = [20, 30, 40, 23, 29, 33, 31, 12, 44, 32, 90, 14, 21, 12, 13, 33, 18, 12, 12, 22];
-      var dataAxis =[];
-      var data =[];
       var yMax = 100;
       var dataShadow = [];
 
-      for (var i = 0; i < data.length; i++) {
+      for (var i = 0; i < data2.length; i++) {
           dataShadow.push(yMax);
       }
 
@@ -145,7 +143,7 @@
                           )
                       }
                   },
-                  data: data
+                  data: data2
               }
           ]
       };

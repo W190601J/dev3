@@ -12,6 +12,6 @@ public interface DetailsService {
     public List<Detail> findAll(String oid);
 
     //查询当月菜品的销售量
-    public int Sum(Integer fid);
+    public Integer Sum(Integer fid);
 
 }
