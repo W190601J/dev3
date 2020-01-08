@@ -93,17 +93,17 @@ border-radius:3px;
         <div class="line"><input type="text" placeholder="联系电话" id="bphone" value=""></div>
         <div class="line">
 		<!-- sel-provance -->
-        <select id="s_province" name="s_province"></select><br>		
-		</div>
-         <div class="line">
-		  <select id="s_city" name="s_city" ></select><br><!-- sel -->
-		 </div>
-         <div class="line">
+<!--        <select id="s_province" name="s_province"></select><br>		-->
+<!--		</div>-->
+<!--         <div class="line">-->
+<!--		  <select id="s_city" name="s_city" ></select><br>&lt;!&ndash; sel &ndash;&gt;-->
+<!--		 </div>-->
+<!--         <div class="line">-->
 		 <!-- sel-area -->
-		 <select id="s_county" name="s_county"></select><br>
-		 </div>
-        <script type="text/javascript" src="js/area.js"></script>
-        <script type="text/javascript">_init_area();</script>
+<!--		 <select id="s_county" name="s_county"></select><br>-->
+<!--		 </div>-->
+<!--        <script type="text/javascript" src="js/area.js"></script>-->
+<!--        <script type="text/javascript">_init_area();</script>-->
 	 	 
         <div class="line"><input type="text" placeholder="详细地址" id="address" value=""></div>
     </div>
@@ -238,8 +238,13 @@ border-radius:3px;
             url:'/ordering/order/create',
             data:datas,
             success:function(data){
+                alert(data);
+                console.log(data);
                 if(data!=null){
-                    alert("下单成功，即将进行支付页面！")
+                    alert("下单成功，即将进行支付页面！");
+                    var ordering = JSON.stringify(data);
+                    localStorage.setItem("ordering",ordering);
+                    location.href = "pay.html";
                 }
 
             },

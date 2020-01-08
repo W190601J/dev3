@@ -74,6 +74,18 @@
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
         </dependency>
+        <!-- 沙箱支付 -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>4.8.73.ALL</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.7</version>
+        </dependency>
 
 
 
